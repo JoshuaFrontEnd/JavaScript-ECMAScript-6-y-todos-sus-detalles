@@ -51,8 +51,51 @@
 // console.log( mensaje )
 
 // - Ahora cuando definimos una variable con "let" no es afectada por el "Hoisting", en el siguiente caso, la variable "mensaje" declarada con "let" solo existe en el "scope" del "if", por lo que al querer acceder a ella desde el "scope global" JavaScript nos devolvera un error de definicion
-if ( 1 === 3 ) {
-  let mensaje = "Hola Mundo"
+// if ( 1 === 3 ) {
+//   let mensaje = "Hola Mundo"
+// }
+
+// console.log( mensaje )
+
+/* -----------------------------------------------------------------
+              Con Let no existen las re declaraciones
+----------------------------------------------------------------- */
+
+// - Otra gran diferencia entre "let" y "var" es que con var podemos re declarar una variable tantas veces queramos:
+
+// var mensaje = "primero"
+// var mensaje = "segundo"
+// var mensaje = "tercero"
+// var mensaje = "cuarto"
+
+// console.log( mensaje ) // cuarto
+
+// - Con "let" esto no es posible, incluso dara un error de definicion, ya que forzara a declarar una sola vez la variable
+
+// var mensaje = "primero"
+// var mensaje = "segundo"
+// let mensaje = "tercero"
+// var mensaje = "cuarto"
+
+// console.log( mensaje ) // Error: Identifier 'mensaje' has already been declared
+
+// - Debido a este comportamiento al declarar una variable con "let" se podria pensar que el siguiente console.log dara un error:
+
+// let mensaje = "Hola"
+
+// if ( true ) {
+//   let mensaje = "Que tal"
+// }
+
+// console.log( mensaje ) // Hola
+
+// - Pero sucede que si bien se ha declarado la misma variable dos veces, tecnicamente no son la misma variable, eso es por que una ha sido declarada en el "scope global" y otra en el "scope" del "if", por eso no dara error, para corroborar esto podemos ejecutar un console.log con el valor de "mensaje" dentro del "scope" del "if" y otro console.log con el valor de "mensaje" en el "scope global"
+
+let mensaje = "Hola"
+
+if ( true ) {
+  let mensaje = "Que tal"
+  console.log( mensaje ) // Que tal
 }
 
-console.log( mensaje )
+console.log( mensaje ) // Hola
