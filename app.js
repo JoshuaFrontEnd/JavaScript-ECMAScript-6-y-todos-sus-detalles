@@ -91,11 +91,60 @@
 
 // - Pero sucede que si bien se ha declarado la misma variable dos veces, tecnicamente no son la misma variable, eso es por que una ha sido declarada en el "scope global" y otra en el "scope" del "if", por eso no dara error, para corroborar esto podemos ejecutar un console.log con el valor de "mensaje" dentro del "scope" del "if" y otro console.log con el valor de "mensaje" en el "scope global"
 
-let mensaje = "Hola"
+// let mensaje = "Hola"
 
-if ( true ) {
-  let mensaje = "Que tal"
-  console.log( mensaje ) // Que tal
+// if ( true ) {
+//   let mensaje = "Que tal"
+//   console.log( mensaje ) // Que tal
+// }
+
+// console.log( mensaje ) // Hola
+
+/* -----------------------------------------------------------------
+                    Declaraciones de constantes
+----------------------------------------------------------------- */
+
+// - En Ecmascript 6 aparecieron las variables de tipo constante "const", su funcionamiento es casi igual a "let", salvo que la variables definidas con "const" no pueden cambiar/variar/mutar/reasignar su valor, con la definicion "let" si pueden cambiar/variar/mutar/reasignar su valor
+
+// - En Javascript es una buena practica, pero no obligatorio, que al declarar una variable con "const" sea escrita en Mayusculas
+
+// const IMPUESTO_SV = 15.25
+
+// - Y a diferencia de las declaraciones "var" y "let" dara un error si la variable es declarada con "const" pero no inicializada:
+
+// const IMPUESTO_SV // Error: Missing initializer in const declaration
+
+// - Como explique anteriormente no se puede cambiar/variar/mutar/reasignar el valor de una variable constante:
+
+// IMPUESTO_SV = 30 // Error: Assignment to constant variable
+
+// - Al igual que la declaracion "let", "const" asigna su valor por scope:
+
+// const IMPUESTO_SV = 15.25
+
+// if ( true ) {
+//   const IMPUESTO_SV = 19.75
+//   console.log( IMPUESTO_SV ) // 19.75
+// }
+
+// console.log( IMPUESTO_SV ) // 15.25
+
+// - Un comportamiento "extraño" de la definicion "const" es que si bien su valor debe ser constante, cuando definimos un objeto con esta declaracion, podemos cambiar el valor de sus propiedades, pero no re inicializar el objeto completo:
+
+const PERSONA = {
+  nombre: "Tulio",
+  apellido: "Triviño"
 }
 
-console.log( mensaje ) // Hola
+// - Esto dara error:
+
+// const PERSONA = {
+//   nombre: "Policarpio",
+//   apellido: "Avendañor"
+// }
+
+// - Pero esto no:
+
+PERSONA.nombre = "Bodoque"
+
+console.log( PERSONA ) // {nombre: 'Bodoque', apellido: 'Triviño'}
