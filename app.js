@@ -148,3 +148,33 @@ const PERSONA = {
 PERSONA.nombre = "Bodoque"
 
 console.log( PERSONA ) // {nombre: 'Bodoque', apellido: 'Triviño'}
+
+/* -----------------------------------------------------------------
+                Declaraciones de variables en ciclos
+----------------------------------------------------------------- */
+
+// - Para poner en practica los conceptos explicados anteriormente veamos como funcionaria un ciclo FOR con las diferentes declaraciones de variables
+
+// - Cuando declaramos una variable con "var" en los argumentos de un ciclo FOR, su valor podra ser accesible desde cualquier "scope"
+
+// for ( var i = 0; i <= 10 ; i++) {
+
+// }
+
+// console.log( i ) // 11
+
+// - En cambio cuando definimos una variable con "let" en los argumentos de un ciclo FOR, su valor solo existira en el "scope" del ciclo FOR
+
+// for ( let i = 0; i <= 10 ; i++) {
+
+// }
+
+// console.log( i ) // Uncaught ReferenceError: i is not defined
+
+// - Al definir una variable con "const" en los argumentos de un ciclo FOR Javascript nos dara un error ya que el valor de una variable definida con "const" no puede cambiar/variar/mutar/reasignar
+
+for ( const i = 0; i <= 10 ; i++) {
+
+}
+
+console.log( i ) // Uncaught TypeError: Assignment to constant variable
