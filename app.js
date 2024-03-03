@@ -131,23 +131,23 @@
 
 // - Un comportamiento "extraño" de la definicion "const" es que si bien su valor debe ser constante, cuando definimos un objeto con esta declaracion, podemos cambiar el valor de sus propiedades, pero no re inicializar el objeto completo:
 
-const PERSONA = {
-  nombre: "Tulio",
-  apellido: "Triviño"
-}
-
-// - Esto dara error:
-
 // const PERSONA = {
-//   nombre: "Policarpio",
-//   apellido: "Avendañor"
+//   nombre: "Tulio",
+//   apellido: "Triviño"
 // }
 
-// - Pero esto no:
+// // - Esto dara error:
 
-PERSONA.nombre = "Bodoque"
+// // const PERSONA = {
+// //   nombre: "Policarpio",
+// //   apellido: "Avendañor"
+// // }
 
-console.log( PERSONA ) // {nombre: 'Bodoque', apellido: 'Triviño'}
+// // - Pero esto no:
+
+// PERSONA.nombre = "Bodoque"
+
+// console.log( PERSONA ) // {nombre: 'Bodoque', apellido: 'Triviño'}
 
 /* -----------------------------------------------------------------
                 Declaraciones de variables en ciclos
@@ -173,8 +173,69 @@ console.log( PERSONA ) // {nombre: 'Bodoque', apellido: 'Triviño'}
 
 // - Al definir una variable con "const" en los argumentos de un ciclo FOR Javascript nos dara un error ya que el valor de una variable definida con "const" no puede cambiar/variar/mutar/reasignar
 
-for ( const i = 0; i <= 10 ; i++) {
+// for ( const i = 0; i <= 10 ; i++) {
+
+// }
+
+// console.log( i ) // Uncaught TypeError: Assignment to constant variable
+
+/* -----------------------------------------------------------------
+        Declaraciones de variables en funciones con ciclos
+----------------------------------------------------------------- */
+
+// - Suponiendo que tenemos un array vacio el cual iremos "rellenando" con funciones que imprimen el valor del contador "i"
+
+// var funciones = []
+
+// for ( var i = 0; i < 10 ; i++) {
+
+//   funciones.push( function(){ console.log(i) } )
+
+// }
+
+// - Uno esperaria que al "barrer" el arreglo "funciones" cada console.log imprimiera el numero del contador "i" del 0 hasta el 9, pero el resultado imprime 10 veces 10, esto sucede por que como se declaro la variable con "var" con alcance al "scope global" el valor de "i" fue sobreescrito en cada ciclo y al finalizar su valor queda en 10, entonces cuando hacemos el "barrido" los console.log el valor de la variable "i" es de 10
+// funciones.forEach( function( func ) {
+
+//   func()
+
+// })
+
+// - Si aun asi quisieramos seguir utilizando "var" para poder imprimir del 0 hasta el 9, habria que realizar una modificacion un poco mas compleja, añandiendo logica innecesaria:
+
+// var funciones = []
+
+// for ( var i = 0; i < 10 ; i++) {
+
+//   funciones.push(
+
+//     (function( i ) {
+
+//       return function(){ console.log( i ) }
+
+//     })(i)
+
+//    )
+
+// }
+
+// funciones.forEach( function( func ) {
+
+//   func()
+
+// })
+
+// - En Ecmascript 6 podemos evitar hacer todo esto y dejar el ejemplo inicial con el comportamiento esperado simplemente cambiando la declaracion de la variable por "let"
+
+var funciones = []
+
+for ( let i = 0; i < 10 ; i++) {
+
+  funciones.push( function(){ console.log( i ) } )
 
 }
 
-console.log( i ) // Uncaught TypeError: Assignment to constant variable
+funciones.forEach( function( func ) {
+
+  func()
+
+})
