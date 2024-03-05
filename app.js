@@ -325,12 +325,13 @@ var saludo = "Hola Mundo!"
 
 // - Las "Template literals" sirven para habilitar el uso de expresiones JavaScript en cadenas de caracteres, se definen usando el simbolo de comillas invertidas ( `` ) y para ejecutar una expresion se declara con el simbolo dolar envuelto en llaves ( ${} )
 
-let nombre = "Tulio"
-let apellido = "Triviño"
+// let nombre = "Tulio"
+// let apellido = "Triviño"
 
-function obtenerNombre() {
-  return "Tulio Triviño"
-}
+// function obtenerNombre() {
+//   return "Tulio Triviño"
+// }
+
 // - Concatenacion de caracteres con variables de la manera clasica
 
 // let nombreCompletoClasico = "El nombre completo es: " + nombre + " " + apellido
@@ -354,8 +355,37 @@ function obtenerNombre() {
 
 // Declaracion multilinea con "Template literals"
 
-let multilineaTemplate = `<h1 class="nombre">${ nombre }</h1>
-<p class="apellido">${ apellido }</p>`
+// let multilineaTemplate = `<h1 class="nombre">${ nombre }</h1>
+// <p class="apellido">${ apellido }</p>`
 
-console.log( multilineaTemplate )
+// console.log( multilineaTemplate )
 
+/* -----------------------------------------------------------------
+             Plantillas etiquetadas - Template tags
+----------------------------------------------------------------- */
+
+// - Los "Template literals" poseen una funcionalidad que permite validar o formatear los datos de una plantilla antes de asignarlos a una variable, esto se llama "Template tags", para utilizarlos primero se debe crear una funcion que sera la encargada de validar/formatear el "Template literal" y se asigna antes del mismo, pero a diferencia de un llamado de funcion normal se invoca sin los parentesis, en el estandar de Ecma se definio asi, para que Javascript sepa diferenciar entre la invocacion normal de una funcion y un "Template tag"
+
+// - Creo la funcion que va a validar/formatear mi "template string", esta funcion desde la cadena de caracteres recibe dos argumentos, el primero se llama "literals" que es un array con literalmente los caracteres de la cadena y el segundo se llama "substituciones" que es un arreglo con todos los datos resultantes de las expresiones en la plantilla
+
+function etiqueta( literales, ...substituciones ) {
+
+  let resultado = ""
+
+  console.log( literales )
+  console.log( substituciones );
+
+  for( let i = 0; i <= substituciones.length ; i++){
+    resultado += literales[i]
+    resultado += substituciones[i] || ''
+  }
+
+  return resultado
+
+}
+
+let unidades = 5, costo_unitario = 10
+
+let mensaje = etiqueta`${ unidades } lapices cuestan ${ unidades * costo_unitario } pesos`
+
+console.log( mensaje )
