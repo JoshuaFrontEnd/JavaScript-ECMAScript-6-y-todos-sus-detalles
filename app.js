@@ -278,4 +278,46 @@ var saludo = "Hola Mundo!"
 
 // - Tambien si nos equivocamos en la posicion podriamos obtener un "false", por ejemplo, buscar el caracter "a" en la cadena "Hola Mundo!" a partir de la posicion 6, dara "false", porque el caracter "a" se encuentra en la posicion 3
 
-console.log( saludo.includes( "a", 6 ) ) // false
+// console.log( saludo.includes( "a", 6 ) ) // false
+
+/* -----------------------------------------------------------------
+                 Repeticiones de strings - Repeat
+----------------------------------------------------------------- */
+
+// - En Ecmascript 6 existe el metodo "repeat", el cual permite duplicar caracteres, pasandole como parametro la cantidad de veces que se quiere repetir el caracter
+
+// - Por ejemplo si queremos repetir dos veces la palabra "hola":
+
+// let texto = "Hola"
+
+// console.log( texto.repeat(2) ) // HolaHola
+
+// - Ahora podemos crear maneras "novedosas" para mostrar la informacion utilizando "repeat":
+
+// - Defino una cantidad de espacios base:
+
+const ESPACIOS = 12
+
+// - Defino dos arreglos de datos que estan relacionados:
+
+let nombres = ["Tulio", "Patana", "Juanin"]
+let telefonos = ["99887766", "33445566", "22334455"]
+
+// - Recorro cada arreglo y utilizando un formato especifico de impresion mas el metodo repeat puedo crear esta tabla en el console.log:
+
+for ( i in nombres ) {
+
+  let dif = ESPACIOS - nombres[i].length
+
+  console.log( nombres[i] + " ".repeat( dif ) + "| " + telefonos[i] )
+
+}
+
+// Output:
+
+// Tulio       | 99887766
+// Patana      | 33445566
+// Juanin      | 22334455
+
+
+
