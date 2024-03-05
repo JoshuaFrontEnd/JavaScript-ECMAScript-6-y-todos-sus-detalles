@@ -296,22 +296,22 @@ var saludo = "Hola Mundo!"
 
 // - Defino una cantidad de espacios base:
 
-const ESPACIOS = 12
+// const ESPACIOS = 12
 
 // - Defino dos arreglos de datos que estan relacionados:
 
-let nombres = ["Tulio", "Patana", "Juanin"]
-let telefonos = ["99887766", "33445566", "22334455"]
+// let nombres = ["Tulio", "Patana", "Juanin"]
+// let telefonos = ["99887766", "33445566", "22334455"]
 
 // - Recorro cada arreglo y utilizando un formato especifico de impresion mas el metodo repeat puedo crear esta tabla en el console.log:
 
-for ( i in nombres ) {
+// for ( i in nombres ) {
 
-  let dif = ESPACIOS - nombres[i].length
+//   let dif = ESPACIOS - nombres[i].length
 
-  console.log( nombres[i] + " ".repeat( dif ) + "| " + telefonos[i] )
+//   console.log( nombres[i] + " ".repeat( dif ) + "| " + telefonos[i] )
 
-}
+// }
 
 // Output:
 
@@ -319,5 +319,43 @@ for ( i in nombres ) {
 // Patana      | 33445566
 // Juanin      | 22334455
 
+/* -----------------------------------------------------------------
+            Plantillas literales - Template Literals
+----------------------------------------------------------------- */
 
+// - Las "Template literals" sirven para habilitar el uso de expresiones JavaScript en cadenas de caracteres, se definen usando el simbolo de comillas invertidas ( `` ) y para ejecutar una expresion se declara con el simbolo dolar envuelto en llaves ( ${} )
+
+let nombre = "Tulio"
+let apellido = "Triviño"
+
+function obtenerNombre() {
+  return "Tulio Triviño"
+}
+// - Concatenacion de caracteres con variables de la manera clasica
+
+// let nombreCompletoClasico = "El nombre completo es: " + nombre + " " + apellido
+// console.log( nombreCompletoClasico )
+
+// - Concatenacion de caracteres con variables usando "Template literals"
+
+// let nombreCompletoTemplate = `El nombre completo es: ${ nombre } ${ apellido }`
+// console.log( nombreCompletoTemplate )
+
+// - Concatenacion de caracteres con funcion usando "Template literals"
+// let nombreCompletoTemplateFuncion = `El nombre completo es: ${ obtenerNombre() }`
+// console.log( nombreCompletoTemplateFuncion )
+
+// - La gran ventaja de las "Template literals" aparece cuando usamos "multilinea", ya que podemos declarar caracteres especiales sin que se rompa la cadena:
+
+// - Declaracion multilinea clasica:
+
+// let multilineaClasica = "<h1 class=\"nombre\">" + nombre + "</h1> \n<p class=\"apellido\">" + apellido + "</p>"
+// console.log( multilineaClasica )
+
+// Declaracion multilinea con "Template literals"
+
+let multilineaTemplate = `<h1 class="nombre">${ nombre }</h1>
+<p class="apellido">${ apellido }</p>`
+
+console.log( multilineaTemplate )
 
