@@ -368,24 +368,34 @@ var saludo = "Hola Mundo!"
 
 // - Creo la funcion que va a validar/formatear mi "template string", esta funcion desde la cadena de caracteres recibe dos argumentos, el primero se llama "literals" que es un array con literalmente los caracteres de la cadena y el segundo se llama "substituciones" que es un arreglo con todos los datos resultantes de las expresiones en la plantilla
 
-function etiqueta( literales, ...substituciones ) {
+// function etiqueta( literales, ...substituciones ) {
 
-  let resultado = ""
+//   let resultado = ""
 
-  console.log( literales )
-  console.log( substituciones );
+//   console.log( literales )
+//   console.log( substituciones );
 
-  for( let i = 0; i <= substituciones.length ; i++){
-    resultado += literales[i]
-    resultado += substituciones[i] || ''
-  }
+//   for( let i = 0; i <= substituciones.length ; i++){
+//     resultado += literales[i]
+//     resultado += substituciones[i] || ''
+//   }
 
-  return resultado
+//   return resultado
 
-}
+// }
 
-let unidades = 5, costo_unitario = 10
+// let unidades = 5, costo_unitario = 10
 
-let mensaje = etiqueta`${ unidades } lapices cuestan ${ unidades * costo_unitario } pesos`
+// let mensaje = etiqueta`${ unidades } lapices cuestan ${ unidades * costo_unitario } pesos`
 
-console.log( mensaje )
+// console.log( mensaje )
+
+/* -----------------------------------------------------------------
+        Usando valores "raw" (crudos) en templates literales
+----------------------------------------------------------------- */
+
+// - Los "Template literals" poseen un tag/metodo unico para crear cadenas de caracteres en crudo tal como serían generadas por la función por defecto de plantilla, concatenando sus partes
+
+let mensaje = `Hola \nMundo\\`, mensaje2 = String.raw`Hola \nMundo\\`
+
+console.log( mensaje, mensaje2 )
