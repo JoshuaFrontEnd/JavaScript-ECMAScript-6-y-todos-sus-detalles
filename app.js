@@ -226,16 +226,56 @@
 
 // - En Ecmascript 6 podemos evitar hacer todo esto y dejar el ejemplo inicial con el comportamiento esperado simplemente cambiando la declaracion de la variable por "let"
 
-var funciones = []
+// var funciones = []
 
-for ( let i = 0; i < 10 ; i++) {
+// for ( let i = 0; i < 10 ; i++) {
 
-  funciones.push( function(){ console.log( i ) } )
+//   funciones.push( function(){ console.log( i ) } )
 
-}
+// }
 
-funciones.forEach( function( func ) {
+// funciones.forEach( function( func ) {
 
-  func()
+//   func()
 
-})
+// })
+
+/* =================================================================
+
+ Sección 3: Nuevos métodos con cadenas de caracteres - Strings
+
+================================================================= */
+
+/* -----------------------------------------------------------------
+     Segmentos de caracteres - startsWith - endsWith - includes
+----------------------------------------------------------------- */
+
+var saludo = "Hola Mundo!"
+
+// - En Ecmascript 5 para saber si la primera letra de una cadena era la que necesitabamos, en este caso "H", habia que hacerlo de esta manera:
+
+// console.log( saludo.substr( 0,1 ) === "H" ) // true
+
+// - Ahora con Ecmascript 6 podemos utilizar el metodo "startsWith"
+
+// console.log( saludo.startsWith( "H" ) ) // true
+
+// - El metodo "startsWith" tambien acepta palabras
+
+// console.log( saludo.startsWith( "Hola" ) ) // true
+
+// - Ahora para saber si la ultima letra o palabra coincide con lo que necesitamos usamos el metodo "endsWith"
+
+// console.log( saludo.endsWith( "o!" ) ) // true
+
+// - Para saber si existe un determinado caracter o palabra en una cadena ahora podemos usar el metodo "includes"
+
+// console.log( saludo.includes( "x" ) ) // false
+
+// - Estas funciones poseen un parametro opcional, que es para hacer la evaluacion en una posicion especifica de la cadena, por ejemplo si queremos encontrar los caracteres "Mu" a partir de la posicion en la cual deberian encontrarse en la cadena, la posicion de los caracteres "Mu" en la cadena "Hola Mundo!" seria la 5, ya que la primera letra de la cadena corresponde a la posicion 1
+
+// console.log( saludo.startsWith( "Mu", 5 ) ) // true
+
+// - Tambien si nos equivocamos en la posicion podriamos obtener un "false", por ejemplo, buscar el caracter "a" en la cadena "Hola Mundo!" a partir de la posicion 6, dara "false", porque el caracter "a" se encuentra en la posicion 3
+
+console.log( saludo.includes( "a", 6 ) ) // false
