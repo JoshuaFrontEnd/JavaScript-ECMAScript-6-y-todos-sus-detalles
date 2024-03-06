@@ -502,10 +502,65 @@
 
 // - Cuando definimos valores por defecto en los parametros estos no seran referenciados en el objeto "Arguments"
 
-function valoresArguments( a = 2, b = 3 ) {
+// function valoresArguments( a = 2, b = 3 ) {
+
+//   console.log( arguments )
+
+// }
+
+// valoresArguments() // Arguments []
+
+/* -----------------------------------------------------------------
+             Parametros Rest - Parametros sin nombre
+----------------------------------------------------------------- */
+
+// - En Ecmascript 6 los parámetros "Rest" nos permiten representar un número indefinido de argumentos como un array
+
+// - Ese parametro se convierte en un arreglo que contiene el "resto" de los parametros pasados a la funcion, de ahi se origina el nombre "Rest"
+
+// - Por ejemplo si necesito crear una funcion que permita agregar alumnos a un arreglo, donde el primer parametro sea el arreglo actual de alumnos y los demas parametros sean N cantidad de alumnos:
+
+// - En Ecmascript 5:
+// function agregar_alumno() {
+
+//   console.log( arguments )
+
+//   for ( var i = 1; i < arguments.length; i++) {
+
+//     arguments[0].push( arguments[i] )
+
+//   }
+
+//   return arguments[0]
+
+// }
+
+// var alumnos_arr = ["Tulio"]
+
+// var alumnos_arr_resto = agregar_alumno( alumnos_arr, "Patana", "Policarpio", "Cindy", "Juanin")
+
+// console.log( alumnos_arr_resto )
+
+// - En Ecmascript 6:
+
+function agregar_alumno( arr_alumnos, ...alumnos ) {
 
   console.log( arguments )
 
+  for ( var i = 0; i < alumnos.length; i++) {
+
+    arr_alumnos.push( alumnos[i] )
+
+  }
+
+  return arr_alumnos
+
 }
 
-valoresArguments() // Arguments []
+var alumnos_arr = ["Tulio"]
+
+var alumnos_arr_resto = agregar_alumno( alumnos_arr, "Patana", "Policarpio", "Cindy", "Juanin")
+
+console.log( alumnos_arr_resto )
+
+// - Con el parametro "Rest" queda mucho mas claro que se podran enviar N cantidad de argumentos
