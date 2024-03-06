@@ -284,7 +284,7 @@
                  Repeticiones de strings - Repeat
 ----------------------------------------------------------------- */
 
-// - En Ecmascript 6 existe el metodo "repeat", el cual permite duplicar caracteres, pasandole como parametro la cantidad de veces que se quiere repetir el caracter
+// - En Ecmascript 6 existe el metodo "repeat", el cual permite duplicar caracteres, pasandole como argumento la cantidad de veces que se quiere repetir el caracter
 
 // - Por ejemplo si queremos repetir dos veces la palabra "hola":
 
@@ -428,10 +428,10 @@
 
 // function saludo( mensaje, tiempo ) {
 
-//   // - Primera forma, si no viene el argumento mensaje reemplazar su valor por "Hola Mundo"
+//   // - Primera forma, si no viene el parametro mensaje reemplazar su valor por "Hola Mundo"
 //   // mensaje = mensaje || "Hola Mundo"
 
-//   // - Segunda forma, si el tipo de valor del argumento mensaje es "undefined", reemplazar su valor por "Hola Mundo"
+//   // - Segunda forma, si el tipo de valor del parametro mensaje es "undefined", reemplazar su valor por "Hola Mundo"
 //   mensaje = ( typeof mensaje !== "undefined" ) ? mensaje : "Hola Mundo"
 
 //   setTimeout( function() {
@@ -462,24 +462,50 @@
 
 // - Ejemplo con argumentos opcionales de tipo "function" y "Object"
 
-function saludar( fn = fnArg, titere = objArg ) {
+// function saludar( fn = fnArg, titere = objArg ) {
 
-  fn()
+//   fn()
 
-  console.log( titere )
+//   console.log( titere )
+
+// }
+
+// function fnArg() {
+//   console.log( "Hola Mundo" )
+// }
+
+// var objArg = {
+//   nombre: "Tulio"
+// }
+
+// // - Sin definicion de argumentos
+// saludar()
+
+// // - Con definicion de argumentos
+// saludar( function() { console.log( "Cambiando valores opcionales") }, { nombre: "Patana" } )
+
+/* -----------------------------------------------------------------
+      Cómo los valores por defecto afectan el objeto "arguments"
+----------------------------------------------------------------- */
+
+// - Las funciones poseen un objeto similar a un array llamado "Arguments", que contiene los valores de los argumentos pasados a esa funcion, "Arguments" no es un array, pero podemos acceder a las posiciones de sus elementos y a la propiedad length
+
+// - Cuando definimos una funcion con parametros y esos parametros son declarados como argumentos en la invocacion de la funcion, sus valores quedaran referenciados en el objeto "Arguments"
+
+// function valoresArguments( a, b ) {
+
+//   console.log( arguments )
+
+// }
+
+// valoresArguments( 2, 3 ) // Arguments(2) [2, 3]
+
+// - Cuando definimos valores por defecto en los parametros estos no seran referenciados en el objeto "Arguments"
+
+function valoresArguments( a = 2, b = 3 ) {
+
+  console.log( arguments )
 
 }
 
-function fnArg() {
-  console.log( "Hola Mundo" )
-}
-
-var objArg = {
-  nombre: "Tulio"
-}
-
-// - Sin definicion de parametros
-saludar()
-
-// - Con definicion de parametros
-saludar( function() { console.log( "Cambiando valores opcionales") }, { nombre: "Patana" } )
+valoresArguments() // Arguments []
