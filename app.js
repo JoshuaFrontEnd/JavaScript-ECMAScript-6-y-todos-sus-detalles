@@ -543,24 +543,44 @@
 
 // - En Ecmascript 6:
 
-function agregar_alumno( arr_alumnos, ...alumnos ) {
+// function agregar_alumno( arr_alumnos, ...alumnos ) {
 
-  console.log( arguments )
+//   console.log( arguments )
 
-  for ( var i = 0; i < alumnos.length; i++) {
+//   for ( var i = 0; i < alumnos.length; i++) {
 
-    arr_alumnos.push( alumnos[i] )
+//     arr_alumnos.push( alumnos[i] )
 
-  }
+//   }
 
-  return arr_alumnos
+//   return arr_alumnos
 
-}
+// }
 
-var alumnos_arr = ["Tulio"]
+// var alumnos_arr = ["Tulio"]
 
-var alumnos_arr_resto = agregar_alumno( alumnos_arr, "Patana", "Policarpio", "Cindy", "Juanin")
+// var alumnos_arr_resto = agregar_alumno( alumnos_arr, "Patana", "Policarpio", "Cindy", "Juanin")
 
-console.log( alumnos_arr_resto )
+// console.log( alumnos_arr_resto )
 
 // - Con el parametro "Rest" queda mucho mas claro que se podran enviar N cantidad de argumentos
+
+/* -----------------------------------------------------------------
+             Restricciones del Parametro Rest
+----------------------------------------------------------------- */
+
+// - Existen dos restricciones para el uso del parametro "Rest", estas restricciones fueron creadas para que Javascript pueda diferenciar, los parametros con nombre de los parametros anonimos enviados en el arreglo de "Rest"
+
+// - 1 - Solo puede existir un parametro "Rest" en la funcion
+// function juntar_nombres( ...apellidos, ...nombres ){
+//   // cualquier cosa
+// }
+
+// juntar_nombres() // Uncaught SyntaxError: Rest parameter must be last formal parameter
+
+// - 2 - El parametro "Rest" debe ir siempre como ultimo parametro
+// function juntar_nombres( ...apellidos, nombre ){
+//   // cualquier cosa
+// }
+
+// juntar_nombres() // Uncaught SyntaxError: Rest parameter must be last formal parameter
