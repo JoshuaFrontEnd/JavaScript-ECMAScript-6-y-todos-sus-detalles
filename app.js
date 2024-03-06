@@ -584,3 +584,27 @@
 // }
 
 // juntar_nombres() // Uncaught SyntaxError: Rest parameter must be last formal parameter
+
+/* -----------------------------------------------------------------
+                           Operador Spread
+----------------------------------------------------------------- */
+
+// - Es facil confundir el operador "Spread" con el operador "Rest", ya que los dos se representan con tres puntos seguidos (...), la mayor diferencia es que "Spread" sirve para "esparcir" un elemento iterable, ya sea un arreglo (array) o cadena (string) donde cero o mas argumentos son esperados, en cambio "Rest" siempre sera declarado como un conjunto ilimitado de parametros anonimos que podria recibir una funcion
+
+// - El operador de propagación crea una copia superficial del iterable, descomponiéndolo en sus elementos individuales
+
+// - En Ecmascript 5 era frecuente usar Function.prototype.apply en casos donde quieres usar los elementos de un arreglo como argumentos de una función.
+
+// var numeros = [ 1, 5, 10, 20, 100, 234]
+
+// var max = Math.max.apply( null, numeros )
+
+// console.log( max )
+
+// Con el operador "Spread" (spread syntax), el código anterior puede ser escrito como:
+
+let numeros = [ 1, 5, 10, 20, 100, 234]
+
+let max = Math.max( ...numeros )
+
+console.log( max )
