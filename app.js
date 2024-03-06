@@ -250,7 +250,7 @@
      Segmentos de caracteres - startsWith - endsWith - includes
 ----------------------------------------------------------------- */
 
-var saludo = "Hola Mundo!"
+// var saludo = "Hola Mundo!"
 
 // - En Ecmascript 5 para saber si la primera letra de una cadena era la que necesitabamos, en este caso "H", habia que hacerlo de esta manera:
 
@@ -396,6 +396,90 @@ var saludo = "Hola Mundo!"
 
 // - Los "Template literals" poseen un tag/metodo unico para crear cadenas de caracteres en crudo tal como serían generadas por la función por defecto de plantilla, concatenando sus partes
 
-let mensaje = `Hola \nMundo\\`, mensaje2 = String.raw`Hola \nMundo\\`
+// let mensaje = `Hola \nMundo\\`, mensaje2 = String.raw`Hola \nMundo\\`
 
-console.log( mensaje, mensaje2 )
+// console.log( mensaje, mensaje2 )
+
+/* =================================================================
+
+ Sección 4: Funciones en ECMAScript 6
+
+================================================================= */
+
+/* -----------------------------------------------------------------
+            Parametros/Argumentos - opcionales/defecto
+----------------------------------------------------------------- */
+
+// - En las versiones anteriores a Ecmascript 6 cuando no enviabamos un parametro que necesitaba una funcion como argumento, esta nos podria retornar undefined:
+
+// function saludo( mensaje, tiempo ) {
+
+//   setTimeout( function() {
+
+//     console.log( mensaje )
+
+//   }, tiempo);
+
+// }
+
+// saludo() // undefined
+
+// - Lo que se suele hacer para evitar esto es colocar un valor opcional por defecto, de dos manera diferentes
+
+// function saludo( mensaje, tiempo ) {
+
+//   // - Primera forma, si no viene el argumento mensaje reemplazar su valor por "Hola Mundo"
+//   // mensaje = mensaje || "Hola Mundo"
+
+//   // - Segunda forma, si el tipo de valor del argumento mensaje es "undefined", reemplazar su valor por "Hola Mundo"
+//   mensaje = ( typeof mensaje !== "undefined" ) ? mensaje : "Hola Mundo"
+
+//   setTimeout( function() {
+
+//     console.log( mensaje )
+
+//   }, tiempo);
+
+// }
+
+// saludo() // "Hola Mundo"
+
+// - Con Ecmascript 6 esto se simplico con la asignacion de valores por defectos en los argumentos
+
+// - Si al invocar la funcion "saludo" no se declara el parametro "mensaje" se le asignara por defecto el valor de "Hola Mundo" al argumento "mensaje"
+
+// function saludo( mensaje = "Hola Mundo", tiempo ) {
+
+//   setTimeout( function() {
+
+//     console.log( mensaje )
+
+//   }, tiempo);
+
+// }
+
+// saludo() // "Hola Mundo"
+
+// - Ejemplo con argumentos opcionales de tipo "function" y "Object"
+
+function saludar( fn = fnArg, titere = objArg ) {
+
+  fn()
+
+  console.log( titere )
+
+}
+
+function fnArg() {
+  console.log( "Hola Mundo" )
+}
+
+var objArg = {
+  nombre: "Tulio"
+}
+
+// - Sin definicion de parametros
+saludar()
+
+// - Con definicion de parametros
+saludar( function() { console.log( "Cambiando valores opcionales") }, { nombre: "Patana" } )
