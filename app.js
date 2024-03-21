@@ -657,20 +657,20 @@
         Añadir propiedades a objetos a partir de otros objetos
 ----------------------------------------------------------------- */
 
-let persona1 = {
-  nombre: 'Tulio',
-  edad: 33
-}
+// let persona1 = {
+//   nombre: 'Tulio',
+//   edad: 33
+// }
 
-let persona2 = {
-  nombre: 'Juanin',
-  edad: 28,
-  direccion: 'Titirlquen 233232',
-  conduce: true,
-  vehiculo: true,
-  vegetariano: false,
-  casado: true
-}
+// let persona2 = {
+//   nombre: 'Juanin',
+//   edad: 28,
+//   direccion: 'Titirlquen 233232',
+//   conduce: true,
+//   vehiculo: true,
+//   vegetariano: false,
+//   casado: true
+// }
 
 // - Suponiendo que por algun motivo necesitamos en "persona1" las propiedades de "persona2", pero manteniendo los valores actuales en "persona1", podemos hacerlo de la siguiente manera:
 
@@ -680,12 +680,42 @@ let persona2 = {
 
 // - La forma mas eficiente es obtener las propiedades de "persona2" con el operador "spread" y asignarle estas propiedades a "persona1", para mantener las propiedades actuales de "persona1" se las asignamos al final para sobreescribir los valores de "persona2"
 
-persona1 = { ...persona2, ...persona1 }
+// persona1 = { ...persona2, ...persona1 }
 
-console.log( persona1 )
-console.log( persona2 )
+// console.log( persona1 )
+// console.log( persona2 )
 
+/* -----------------------------------------------------------------
+        Diferencias entre los operadores "Spread" y "Rest"
+----------------------------------------------------------------- */
 
+// - REST: Junta los elementos de un arreglo
+// - SPREAD: Esparce los elementos como si fueran enviados de forma separada
 
+function saludarRest( saludo, ...nombres ) {
 
+  for ( i in nombres ) {
+    console.log( `${saludo}, ${nombres[i]}` );
+  }
+
+}
+
+saludarRest( "Hola", "Tulio", "Juanin", "Bodoque" )
+
+function saludarSpread( saludo, ...nombres ) {
+
+  console.log( `${saludo} ${nombres}.` );
+
+}
+
+let personas = ["Tulio", "Juanin", "Bodoque"]
+
+saludarSpread( "Que tal!!", personas )
+
+// Otro ejemplo con "spread"
+
+let salsas = ["Yogurth", "Aceto"]
+let ensalada = ["Lechuga", "Rucula", ...salsas, "Limon", "Palta"]
+
+console.log( ensalada )
 
