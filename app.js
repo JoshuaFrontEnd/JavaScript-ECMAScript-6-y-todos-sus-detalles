@@ -613,14 +613,14 @@
             Romper la relación de referencia de los objetos
 ----------------------------------------------------------------- */
 
-let persona1 = {
-  nombre: 'Tulio',
-  edad: 35,
-  profundo: {
-    a: "b",
-    hola: "chao"
-  }
-}
+// let persona1 = {
+//   nombre: 'Tulio',
+//   edad: 35,
+//   profundo: {
+//     a: "b",
+//     hola: "chao"
+//   }
+// }
 
 // - En Javascript cuando asignamos un objeto a una variable estamos asignando su referencia, es decir: su posicion en memoria. Acá por ejemplo podriamos pensar que "persona2" es un objeto distinto, o mejor dicho una copia de "persona1" ya que estas dos variables tienen nombres distintos, pero en realidad las dos estan haciendo referencia al mismo objeto
 // let persona2 = persona1
@@ -634,23 +634,58 @@ let persona1 = {
 
 // - Ahora, para poder hacer la asignacion o "copia" de un objeto sin que exista una referencia, podemos usar el operador spread que copiara todas las propiedades del objeto "persona1" y se las asignara junto con su valor a un nuevo objeto llamado "persona2"
 
-let persona2 = { ...persona1 }
+// let persona2 = { ...persona1 }
 
 // - Al cambiar el valor de la propiedad "nombre"
 
-persona2.nombre = 'Policarpio'
+// persona2.nombre = 'Policarpio'
 
 // - Hay que tener en consideracion, que esta manera de "copiar" objetos es "superficial", es decir, si tenemos objetos anidados como valores de propiedades no seran "copiados" y se asignara solo su referencia, por lo que si intentamos modificar una propiedad de algun objeto anidado cambiara tanto en "persona2" como en "persona1", a este comportamiento se le conoce como "shallow cloning"
 
-persona2.profundo.hola = 'Adios'
+// persona2.profundo.hola = 'Adios'
 
-console.log( persona1 )
-console.log( persona2 )
+// console.log( persona1 )
+// console.log( persona2 )
 
 // - Para hacer una "copia" incluso de los objetos anidados, podemos usar una tecnica como la siguiente:
 
 // const nuevoObjeto = JSON.parse(JSON.stringify( objetoOriginal ))
 
 // - O usar alguna libreria como "lodash", a este tipo de "copia" se le conoce como "Deep cloning" y permite crear una referencia completamente nueva a partir de un objeto
+
+/* -----------------------------------------------------------------
+        Añadir propiedades a objetos a partir de otros objetos
+----------------------------------------------------------------- */
+
+let persona1 = {
+  nombre: 'Tulio',
+  edad: 33
+}
+
+let persona2 = {
+  nombre: 'Juanin',
+  edad: 28,
+  direccion: 'Titirlquen 233232',
+  conduce: true,
+  vehiculo: true,
+  vegetariano: false,
+  casado: true
+}
+
+// - Suponiendo que por algun motivo necesitamos en "persona1" las propiedades de "persona2", pero manteniendo los valores actuales en "persona1", podemos hacerlo de la siguiente manera:
+
+// - Copiando de manera literal cada uno de los valores de "persona2" y asignarles esos valores a "persona1":
+
+// persona1.direccion = persona2.direccion // ...Y asi con cada propiedad, lo cual si tenemos miles de propiedades es un trabajo muy ineficiente de hacer
+
+// - La forma mas eficiente es obtener las propiedades de "persona2" con el operador "spread" y asignarle estas propiedades a "persona1", para mantener las propiedades actuales de "persona1" se las asignamos al final para sobreescribir los valores de "persona2"
+
+persona1 = { ...persona2, ...persona1 }
+
+console.log( persona1 )
+console.log( persona2 )
+
+
+
 
 
