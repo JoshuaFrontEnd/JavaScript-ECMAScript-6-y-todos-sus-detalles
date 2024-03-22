@@ -692,30 +692,100 @@
 // - REST: Junta los elementos de un arreglo
 // - SPREAD: Esparce los elementos como si fueran enviados de forma separada
 
-function saludarRest( saludo, ...nombres ) {
+// function saludarRest( saludo, ...nombres ) {
 
-  for ( i in nombres ) {
-    console.log( `${saludo}, ${nombres[i]}` );
+//   for ( i in nombres ) {
+//     console.log( `${saludo}, ${nombres[i]}` );
+//   }
+
+// }
+
+// saludarRest( "Hola", "Tulio", "Juanin", "Bodoque" )
+
+// function saludarSpread( saludo, ...nombres ) {
+
+//   console.log( `${saludo} ${nombres}.` );
+
+// }
+
+// let personas = ["Tulio", "Juanin", "Bodoque"]
+
+// saludarSpread( "Que tal!!", personas )
+
+// Otro ejemplo con "spread"
+
+// let salsas = ["Yogurth", "Aceto"]
+// let ensalada = ["Lechuga", "Rucula", ...salsas, "Limon", "Palta"]
+
+// console.log( ensalada )
+
+/* -----------------------------------------------------------------
+ Verificar si una funcion esta siendo invocada con el operador "new"
+----------------------------------------------------------------- */
+
+// - En Ecmascript 5 y versiones anteriores, las funciones sirven con un doble proposito, de ser llamadas con o sin la palabra reservada "new"
+
+// function Persona( nombre ) {
+
+//   // Cuando llamamos sin "new", el valor de "this" pasa a ser el objeto global, por tanto este valor se asignara a ese objeto, por ejemplo, en el navegador el objeto global es "window", y ahi se crearia la propiedad nombre
+//   this.nombre = nombre
+
+// }
+
+// - Cuando hacemos el llamado con "new" el valor de "THIS" dentro de la funcion es un nuevo objeto y ese nuevo objeto es retornado
+
+// var persona = new Persona("Tulio")
+
+// - Cuando hacemos el llamado sin "new", simplemente esperamos el retorno de algun valor procesado que puede ser un objeto, undefined o null
+
+// var noEsPersona = Persona("Tulio")
+
+// console.log( persona ) // Persona {nombre: 'Tulio'}
+// console.log( noEsPersona ) // undefined
+
+// - Podemos crear una validacion, para evitar que el valor de "this" pase al objeto global y asegurarnos que la funcion sea llamada con el operador "new"
+
+// function Persona( nombre ) {
+
+//   console.log( this )
+
+//   if( this instanceof Persona ) {
+//     this.nombre = nombre
+//   } else {
+//     throw new Error('La funcion "Persona", debe ser invocada con el operador "new"')
+//   }
+
+// }
+
+// - Esto ultimo esta bien, pero existia un problema en Ecmascript 5, todas las funciones poseen en su prototipo un metodo que permite setear, como primer parametro el valor de "this", este metodo se llama "Call"
+
+// var persona = new Persona("Tulio")
+
+// - Acá "simulamos" el "this" usando "call", declarando "this" con un valor que fue creado con el operador "new", la idea es crear otro objeto de tipo "Persona", pero en realidad lo que terminamos haciendo es actualizar el valor del objeto "persona" y por lo tanto nuestra funcion "Persona" no logra lanzar el error que identifica si la llamada a la funcion fue con "new", esto es un problema
+// var noEsPersona = Persona.call( persona, "Bodoque")
+
+console.log( persona ) // Persona {nombre: 'Bodoque'}
+console.log( noEsPersona ) // undefined
+
+// - Para resolver este problema en Ecmascript 6 se creo una "meta propiedad" llamada "new.target"
+
+// - Una meta propiedad, es una propiedad de un "no-objeto", que provee informacion adicional relacionada con su procedencia ( como el "new" ). Cuando el constructor de la funcion es llamada, "new.target" se "llena" con el operador "new". Si el metodo "Call" es ejecutado, "new.target" no estara definida ya que no se ejecuto el constructor
+
+// - En palabras mas sencillas, si queremos evaluar si una funcion fue creada con el operador "new" debemos usar "new.target"
+
+function Persona( nombre ) {
+
+  console.log( this )
+
+  if( typeof new.target !== 'undefined' ) {
+    this.nombre = nombre
+  } else {
+    throw new Error('La funcion "Persona", debe ser invocada con el operador "new"')
   }
 
 }
 
-saludarRest( "Hola", "Tulio", "Juanin", "Bodoque" )
+var persona = new Persona("Tulio")
 
-function saludarSpread( saludo, ...nombres ) {
-
-  console.log( `${saludo} ${nombres}.` );
-
-}
-
-let personas = ["Tulio", "Juanin", "Bodoque"]
-
-saludarSpread( "Que tal!!", personas )
-
-// Otro ejemplo con "spread"
-
-let salsas = ["Yogurth", "Aceto"]
-let ensalada = ["Lechuga", "Rucula", ...salsas, "Limon", "Palta"]
-
-console.log( ensalada )
-
+// - Ahora si lanzara el error, ya que esta invocacion no se esta creando con el operador "new"
+var noEsPersona = Persona.call( persona, "Bodoque")
