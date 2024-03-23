@@ -824,74 +824,92 @@
 ----------------------------------------------------------------- */
 
 // - Funcion tradicional
-var traditionalFunction = function ( valor ) {
-  return valor
-}
+// var traditionalFunction = function ( valor ) {
+//   return valor
+// }
 
 // - Homonimo de la funcion tradicional con la sintaxis de funcion de flecha
-let arrowFunction = valor => valor
+// let arrowFunction = valor => valor
 
-console.log( traditionalFunction("tradicional") )
+// console.log( traditionalFunction("tradicional") )
 
 // - Las funciones de flecha tienen un return implicito cuando solo poseen una unica expresion
-console.log( arrowFunction("flecha") )
+// console.log( arrowFunction("flecha") )
 
 // - Sumando numeros:
 
-var sumaTradicional = function ( num1, num2 ) {
-  return num1 + num2
-}
+// var sumaTradicional = function ( num1, num2 ) {
+//   return num1 + num2
+// }
 
-let sumaFlecha = ( num1, num2 ) => num1 + num2
+// let sumaFlecha = ( num1, num2 ) => num1 + num2
 
-console.log( sumaTradicional( 2, 2) )
-console.log( sumaFlecha( 2, 2) )
+// console.log( sumaTradicional( 2, 2) )
+// console.log( sumaFlecha( 2, 2) )
 
 // - Sin parametros:
 
-var sinParTradicional = function () {
-  return "Hola Mundo"
-}
+// var sinParTradicional = function () {
+//   return "Hola Mundo"
+// }
 
-let sinParFlecha = () => "Hola Mundo"
+// let sinParFlecha = () => "Hola Mundo"
 
-console.log( sinParTradicional() )
-console.log( sinParFlecha() )
+// console.log( sinParTradicional() )
+// console.log( sinParFlecha() )
 
 // - Multi expresion, multi linea:
 
-var saludarTradicional = function ( nombre ) {
+// var saludarTradicional = function ( nombre ) {
 
-  var salida = "Hola, " + nombre
+//   var salida = "Hola, " + nombre
 
-  return salida
+//   return salida
 
-}
+// }
 
 // - Para declarar varias expresiones en las funciones de flecha debemos añadir llaves {}
-let saludarFlecha = nombre => {
+// let saludarFlecha = nombre => {
 
-  let salida = `Hola, ${nombre}`
+//   let salida = `Hola, ${nombre}`
 
-  return salida
-}
+//   return salida
+// }
 
-console.log( saludarTradicional( "Tulio" ) )
-console.log( saludarFlecha( "Tulio" ) )
+// console.log( saludarTradicional( "Tulio" ) )
+// console.log( saludarFlecha( "Tulio" ) )
 
-// - Regresar un objeto literal:
+// // - Regresar un objeto literal:
 
-var obtenerIdTradicional = function ( id ) {
+// var obtenerIdTradicional = function ( id ) {
 
-  return {
-    id: id,
-    nombre: "31 Minutos"
-  }
+//   return {
+//     id: id,
+//     nombre: "31 Minutos"
+//   }
 
-}
+// }
 
 // - Para declarar un objeto literal en el cuerpo de una funcion de flecha, debemos declararlo entre parentesis (), ya que si no lo hacemos, javascript lo considerara como declaracion de expresion. Tambien podemos declarar solo el nombre del parametro, cuando su valor se llama igual, en este caso "id"
-var obtenerIdFlecha = id => ({ id, nombre: "31 Minutos" })
+// var obtenerIdFlecha = id => ({ id, nombre: "31 Minutos" })
 
-console.log( obtenerIdTradicional( 24500 ) )
-console.log( obtenerIdFlecha( 24500 ) )
+// console.log( obtenerIdTradicional( 24500 ) )
+// console.log( obtenerIdFlecha( 24500 ) )
+
+/* -----------------------------------------------------------------
+               Creando funciones de flecha anonimas
+----------------------------------------------------------------- */
+
+// - Funcion anonima tradicional
+var saludoTradicional = function ( nombre ) {
+
+  return "Hola " + nombre
+
+}( "Tradicional" )
+
+console.log( saludoTradicional )
+
+// - Funcion de flecha anonima
+var saludoFlecha = ( nombre => `Hola ${nombre}` )( "Flecha" )
+
+console.log( saludoFlecha )
