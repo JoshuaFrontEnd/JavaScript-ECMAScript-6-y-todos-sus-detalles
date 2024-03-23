@@ -818,3 +818,80 @@
 // - 4. No pueden cambiar el valor de "this"
 // - 5. No hay objeto "arguments"
 // - 6. No pueden tener nombres de parametros duplicados
+
+/* -----------------------------------------------------------------
+                  Ejemplos de funciones de Flecha
+----------------------------------------------------------------- */
+
+// - Funcion tradicional
+var traditionalFunction = function ( valor ) {
+  return valor
+}
+
+// - Homonimo de la funcion tradicional con la sintaxis de funcion de flecha
+let arrowFunction = valor => valor
+
+console.log( traditionalFunction("tradicional") )
+
+// - Las funciones de flecha tienen un return implicito cuando solo poseen una unica expresion
+console.log( arrowFunction("flecha") )
+
+// - Sumando numeros:
+
+var sumaTradicional = function ( num1, num2 ) {
+  return num1 + num2
+}
+
+let sumaFlecha = ( num1, num2 ) => num1 + num2
+
+console.log( sumaTradicional( 2, 2) )
+console.log( sumaFlecha( 2, 2) )
+
+// - Sin parametros:
+
+var sinParTradicional = function () {
+  return "Hola Mundo"
+}
+
+let sinParFlecha = () => "Hola Mundo"
+
+console.log( sinParTradicional() )
+console.log( sinParFlecha() )
+
+// - Multi expresion, multi linea:
+
+var saludarTradicional = function ( nombre ) {
+
+  var salida = "Hola, " + nombre
+
+  return salida
+
+}
+
+// - Para declarar varias expresiones en las funciones de flecha debemos añadir llaves {}
+let saludarFlecha = nombre => {
+
+  let salida = `Hola, ${nombre}`
+
+  return salida
+}
+
+console.log( saludarTradicional( "Tulio" ) )
+console.log( saludarFlecha( "Tulio" ) )
+
+// - Regresar un objeto literal:
+
+var obtenerIdTradicional = function ( id ) {
+
+  return {
+    id: id,
+    nombre: "31 Minutos"
+  }
+
+}
+
+// - Para declarar un objeto literal en el cuerpo de una funcion de flecha, debemos declararlo entre parentesis (), ya que si no lo hacemos, javascript lo considerara como declaracion de expresion. Tambien podemos declarar solo el nombre del parametro, cuando su valor se llama igual, en este caso "id"
+var obtenerIdFlecha = id => ({ id, nombre: "31 Minutos" })
+
+console.log( obtenerIdTradicional( 24500 ) )
+console.log( obtenerIdFlecha( 24500 ) )
