@@ -901,15 +901,41 @@
 ----------------------------------------------------------------- */
 
 // - Funcion anonima tradicional
-var saludoTradicional = function ( nombre ) {
+// var saludoTradicional = function ( nombre ) {
 
-  return "Hola " + nombre
+//   return "Hola " + nombre
 
-}( "Tradicional" )
+// }( "Tradicional" )
 
-console.log( saludoTradicional )
+// console.log( saludoTradicional )
 
 // - Funcion de flecha anonima
-var saludoFlecha = ( nombre => `Hola ${nombre}` )( "Flecha" )
+// var saludoFlecha = ( nombre => `Hola ${nombre}` )( "Flecha" )
 
-console.log( saludoFlecha )
+// console.log( saludoFlecha )
+
+/* -----------------------------------------------------------------
+              Funciones de flecha y el valor de "this"
+----------------------------------------------------------------- */
+
+var manejador = {
+  id: "123",
+  init: function(){
+
+    // - Cuando usamos funciones tradicionales se crea el valor de "this" que hara referencia al contexto de su creacion, en este caso "this" posee el valor de "document", pero nosotros necesitamos que "this" tenga el valor de "manejador", para solucionar eso en Ecmascript 5 le pasamos el "this" de "manejador" a la funcion mediante un "bind()":
+
+    // document.addEventListener("click", (function( event ) {
+    //   this.clickEnPagina( event.type )
+    // }).bind(this))
+
+    // - En cambio en Ecmascript 6 con las funciones de flecha no se crea un nuevo contexto de "this", por lo tanto aqui apuntara directamente al "this" del objeto "manejador":
+
+    document.addEventListener("click", event => this.clickEnPagina( event.type ) )
+
+  },
+  clickEnPagina: function( type ) {
+    console.log( "Manejando " + type + " para el id: " + this.id )
+  }
+}
+
+manejador.init()
