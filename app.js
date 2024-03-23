@@ -963,7 +963,7 @@
 // console.log( ordenadoFlecha )
 
 /* -----------------------------------------------------------------
-         Identificando funciones de flecha y otros ejemplos
+         Funciones de flecha: Typeof, new y arguments
 ----------------------------------------------------------------- */
 
 // - Las funciones de flecha pueden ser identificadas como cualquier otra funcion:
@@ -984,10 +984,50 @@
 // })() // Uncaught ReferenceError: arguments is not defined
 
 // - Sin embargo si son invocadas dentro de una funcion tradicional, podran hacer referencia a los "Arguments" de esa funcion:
-function ejemplo( x, y ) {
-  (( a, b ) => {
-    console.log( arguments[0] ) // 10
-  })()
+// function ejemplo( x, y ) {
+//   (( a, b ) => {
+//     console.log( arguments[0] ) // 10
+//   })()
+// }
+
+// ejemplo( 10, 20 )
+
+/* -----------------------------------------------------------------
+      Simplificando la declaracion de propiedades en objetos
+----------------------------------------------------------------- */
+
+// - En Ecmascript 5 los objetos literales son colecciones de pares:
+
+// var objeto = {
+//   nombre : "Patana",
+//   apellido: "Tufillo",
+//   edad: 20
+// }
+
+// - Si deseamos crear un objeto a partir de una funcion, podriamos hacerlo de la siguiente manera:
+
+// function crearTitere( nombre, apellido, edad ) {
+
+//   return {
+//     nombre: nombre,
+//     apellido: apellido,
+//     edad: edad
+//   }
+
+// }
+
+// - Pero con Ecmascript 6 podemos omitir el nombre del valor de la propiedad si es igual al nombre de la propiedad:
+
+function crearTitere( nombre, apellido, edad ) {
+
+  return {
+    nombre,
+    apellido,
+    edad
+  }
+
 }
 
-ejemplo( 10, 20 )
+let patana = crearTitere( "Patana", "Tufillo", 20 )
+
+console.log( patana )
