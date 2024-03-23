@@ -946,19 +946,48 @@
 
 // - Una de las mayores ventajas de usar Funciones de flecha, es que en la practica optimiza el codigo:
 
-var arreglo = [ 5, 10, 11, 2, 1, 9, 20 ]
+// var arreglo = [ 5, 10, 11, 2, 1, 9, 20 ]
 
 // - Ordenando un array con funcion tradicional
 
-var ordenadoTradicional = arreglo.sort( function( a, b ) {
-  return a - b
-})
+// var ordenadoTradicional = arreglo.sort( function( a, b ) {
+//   return a - b
+// })
 
-console.log( ordenadoTradicional )
+// console.log( ordenadoTradicional )
 
 // - Ordenando un array con funcion de flecha
 
-var ordenadoFlecha = arreglo.sort( ( a, b ) => a - b )
+// var ordenadoFlecha = arreglo.sort( ( a, b ) => a - b )
 
-console.log( ordenadoFlecha )
+// console.log( ordenadoFlecha )
 
+/* -----------------------------------------------------------------
+         Identificando funciones de flecha y otros ejemplos
+----------------------------------------------------------------- */
+
+// - Las funciones de flecha pueden ser identificadas como cualquier otra funcion:
+
+// var restar = ( a, b ) => a - b
+
+// console.log( typeof restar )
+// console.log( restar instanceof Function )
+
+// - Las funciones de flecha no poseen constructor, por lo que no pueden ser invocadas con "new":
+
+// var restar = new restar( 1,2 ) // Uncaught TypeError: restar is not a constructor
+
+// - Las funciones de flecha no poseen el objeto "Arguments":
+
+// (( a, b ) => {
+//  console.log( arguments[0] )
+// })() // Uncaught ReferenceError: arguments is not defined
+
+// - Sin embargo si son invocadas dentro de una funcion tradicional, podran hacer referencia a los "Arguments" de esa funcion:
+function ejemplo( x, y ) {
+  (( a, b ) => {
+    console.log( arguments[0] ) // 10
+  })()
+}
+
+ejemplo( 10, 20 )
