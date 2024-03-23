@@ -918,24 +918,47 @@
               Funciones de flecha y el valor de "this"
 ----------------------------------------------------------------- */
 
-var manejador = {
-  id: "123",
-  init: function(){
+// var manejador = {
+//   id: "123",
+//   init: function(){
 
-    // - Cuando usamos funciones tradicionales se crea el valor de "this" que hara referencia al contexto de su creacion, en este caso "this" posee el valor de "document", pero nosotros necesitamos que "this" tenga el valor de "manejador", para solucionar eso en Ecmascript 5 le pasamos el "this" de "manejador" a la funcion mediante un "bind()":
+//     // - Cuando usamos funciones tradicionales se crea el valor de "this" que hara referencia al contexto de su creacion, en este caso "this" posee el valor de "document", pero nosotros necesitamos que "this" tenga el valor de "manejador", para solucionar eso en Ecmascript 5 le pasamos el "this" de "manejador" a la funcion mediante un "bind()":
 
-    // document.addEventListener("click", (function( event ) {
-    //   this.clickEnPagina( event.type )
-    // }).bind(this))
+//     // document.addEventListener("click", (function( event ) {
+//     //   this.clickEnPagina( event.type )
+//     // }).bind(this))
 
-    // - En cambio en Ecmascript 6 con las funciones de flecha no se crea un nuevo contexto de "this", por lo tanto aqui apuntara directamente al "this" del objeto "manejador":
+//     // - En cambio en Ecmascript 6 con las funciones de flecha no se crea un nuevo contexto de "this", por lo tanto aqui apuntara directamente al "this" del objeto "manejador":
 
-    document.addEventListener("click", event => this.clickEnPagina( event.type ) )
+//     document.addEventListener("click", event => this.clickEnPagina( event.type ) )
 
-  },
-  clickEnPagina: function( type ) {
-    console.log( "Manejando " + type + " para el id: " + this.id )
-  }
-}
+//   },
+//   clickEnPagina: function( type ) {
+//     console.log( "Manejando " + type + " para el id: " + this.id )
+//   }
+// }
 
-manejador.init()
+// manejador.init()
+
+/* -----------------------------------------------------------------
+                   Funciones de Flecha y Arreglos
+----------------------------------------------------------------- */
+
+// - Una de las mayores ventajas de usar Funciones de flecha, es que en la practica optimiza el codigo:
+
+var arreglo = [ 5, 10, 11, 2, 1, 9, 20 ]
+
+// - Ordenando un array con funcion tradicional
+
+var ordenadoTradicional = arreglo.sort( function( a, b ) {
+  return a - b
+})
+
+console.log( ordenadoTradicional )
+
+// - Ordenando un array con funcion de flecha
+
+var ordenadoFlecha = arreglo.sort( ( a, b ) => a - b )
+
+console.log( ordenadoFlecha )
+
