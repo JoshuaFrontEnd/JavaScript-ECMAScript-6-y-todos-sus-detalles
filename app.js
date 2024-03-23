@@ -1076,12 +1076,55 @@
 
 // - En Ecmascript 6 podemos definir directamente en el objeto la propiedad computada, esto basicamente nos podria servir para crear sufijos o prefijos de valores:
 
-var subFijo = " nombre"
+// var subFijo = " nombre"
 
-var titere = {
-  [ "Primer" + subFijo ]: "Juan",
-  [ "Segundo" + subFijo ]: "Carlos"
-}
+// var titere = {
+//   [ "Primer" + subFijo ]: "Juan",
+//   [ "Segundo" + subFijo ]: "Carlos"
+// }
 
-console.log( titere[ "Primer nombre"] ) // Juan
-console.log( titere[ "Segundo" + subFijo ] ) // Carlos
+// console.log( titere[ "Primer nombre"] ) // Juan
+// console.log( titere[ "Segundo" + subFijo ] ) // Carlos
+
+/* -----------------------------------------------------------------
+                     Nuevo método: Object.is()
+----------------------------------------------------------------- */
+
+// - En Javascript cuando deseamos hacer comparaciones de valores podemos usar el operador == que significa "Igualdad no estricta", es decir, que compara el valor de las variables pero no sus tipos, o el operador === que significa "Igualdad estricta", es decir, que compara el valor y el tipo de las variables:
+
+// - Por ejemplo si intentamos hacer la comparacion del cero positivo y el cero negativo con operador == y operador === en ambos casos dara "True", por que los valores matematicamente son iguales y son del mismo tipo, en este caso numerico:
+
+// console.log( +0 == -0 ) // True
+// console.log( +0 === -0 ) // True
+
+//- Pero resulta que computacionalmente los valores son distintos y con los operadores anteriores no pudimos obtener esa comparacion, es ahi que en Ecmascript 6 se crea el metodo "Object.is()" que sirve para hacer una comparacion minuciosa, se pasan como parametros los valores a comparar y en este caso dara "False":
+
+// console.log( Object.is( +0, -0 ) ) // False
+
+// - Otro ejemplo, intentando comparar valores NaN (Not a number):
+
+// - Tecnicamente un NaN al compararse con otro NaN no es igual debido al Estándar IEEE 754 que considera que los numeros flotantes no son iguales a si mismo y NaN se considera un numero flotante
+// console.log( NaN == NaN ) // False
+// console.log( NaN === NaN ) // False
+
+// - Pero objetivamente un valor NaN significa que no es numero, por lo tanto al compararse en definicion un NaN con otro NaN son lo mismo
+// console.log( Object.is( NaN, NaN ) ) // True
+
+// - Otro ejemplo, si intentamos comparar un valor numerico con su mismo valor numerico, o un valor numerico con un caracter que sea igual a su valor ocurrira lo siguiente:
+
+// - Con el comparador de "Igualdad no estricta" dara en ambos casos "True", ya que solo esta comparando el valor, pero no el tipo de valor
+// console.log( 5 == 5 ) // True
+// console.log( 5 == "5" ) // True
+
+// - Con el comparador de "Igualdad estricta", el primer caso dara "True" y el segundo "False", ya que esta comparando valor y tipo, en el primer ejemplo el valor y tipo son iguales, pero en el segundo caso si bien ambos valores son el mismo valor, el primer dato es de tipo "num" y el segundo de tipo "string":
+
+console.log( 5 === 5 ) // True
+console.log( 5 === "5" ) // False
+
+// - Con el comparador "Object.is()" se repite lo mismo que el comparador de "Igualdad estricta", ya que no existe un mayor nivel de precision en este ejemplo:
+
+console.log( Object.is( 5, 5 ) ) // True
+console.log( Object.is( 5, "5" ) ) // False
+
+
+
