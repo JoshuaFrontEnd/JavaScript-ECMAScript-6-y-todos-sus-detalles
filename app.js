@@ -1048,12 +1048,40 @@
 
 // - En Ecmascript 6 no es necesario declarar la palabra reservada "function" al momento de crear el metodo:
 
+// var titere = {
+//   nombre: "Tulio",
+//   // - La propiedad "getNombre" es en si misma la funcion, esto es un metodo de objeto en Ecmascript 6
+//   getNombre() {
+//     console.log( this.nombre )
+//   }
+// }
+
+// titere.getNombre()
+
+/* -----------------------------------------------------------------
+           Nombres de propiedades computadas o procesadas
+----------------------------------------------------------------- */
+
+// - En Ecmascript 5 podemos acceder y/o crear propiedades de un objeto con la notacion de corchetes [] y desde ahí asignarle/sobreescribir un valor a esa propiedad
+
+// var titere = {}
+// var apellido = "apellido"
+
+// titere["primer_nombre"] = "Juan"
+// titere["apellido"] = "Bodoque"
+
+// console.log( titere["primer_nombre"] )
+// console.log( titere["apellido"] )
+// console.log( titere )
+
+// - En Ecmascript 6 podemos definir directamente en el objeto la propiedad computada, esto basicamente nos podria servir para crear sufijos o prefijos de valores:
+
+var subFijo = " nombre"
+
 var titere = {
-  nombre: "Tulio",
-  // - La propiedad "getNombre" es en si misma la funcion, esto es un metodo de objeto en Ecmascript 6
-  getNombre() {
-    console.log( this.nombre )
-  }
+  [ "Primer" + subFijo ]: "Juan",
+  [ "Segundo" + subFijo ]: "Carlos"
 }
 
-titere.getNombre()
+console.log( titere[ "Primer nombre"] ) // Juan
+console.log( titere[ "Segundo" + subFijo ] ) // Carlos
