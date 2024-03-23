@@ -1118,13 +1118,54 @@
 
 // - Con el comparador de "Igualdad estricta", el primer caso dara "True" y el segundo "False", ya que esta comparando valor y tipo, en el primer ejemplo el valor y tipo son iguales, pero en el segundo caso si bien ambos valores son el mismo valor, el primer dato es de tipo "num" y el segundo de tipo "string":
 
-console.log( 5 === 5 ) // True
-console.log( 5 === "5" ) // False
+// console.log( 5 === 5 ) // True
+// console.log( 5 === "5" ) // False
 
 // - Con el comparador "Object.is()" se repite lo mismo que el comparador de "Igualdad estricta", ya que no existe un mayor nivel de precision en este ejemplo:
 
-console.log( Object.is( 5, 5 ) ) // True
-console.log( Object.is( 5, "5" ) ) // False
+// console.log( Object.is( 5, 5 ) ) // True
+// console.log( Object.is( 5, "5" ) ) // False
 
+/* -----------------------------------------------------------------
+                  Nuevo método: Object.assign()
+----------------------------------------------------------------- */
 
+// - En Ecmascript 5 cuando queriamos obtener todas las propiedades de un objeto y asignarselas a otro debiamos hacer lo siguiente:
+
+// - Declaro una funcion que recibe dos objetos, uno que tiene todas las propiedades a copiar ( "objDonador" ) y otro objeto que recibira esas propiedades ( "objReceptor" )
+
+// function mezclar( objReceptor, objDonador ) {
+
+//   // - Obtengo un arreglo con las propiedades del "objDonador"
+//   Object.keys( objDonador ).forEach( function( key ){
+
+//     // - Y se las asigno una por una al "objReceptor", considerar que si existe una propiedad con el mismo nombre de otra esta sera reescrita quedando con el valor de la ultima propiedad obtenida
+//     objReceptor[ key ] = objDonador[ key ]
+
+//   })
+
+//   return objReceptor
+
+// }
+
+var objReceptor = {}
+var objDonador = {
+  nombre: "Tulio",
+  apellido: "Triviño",
+  // - La unica observacion que si definimos un metodo "getter" no sera copiado en el objeto receptor y solo se obtendra el valor del metodo:
+  get profesion(){
+    return "Conductor"
+  }
+}
+
+// - Se copian todas las propiedades, menos las definiciones "get" del "objDonador" al objeto "objReceptor"
+// console.log( mezclar( objReceptor, objDonador ) )
+
+// - Solo el "objDonador" posee las definicones "get"
+
+console.log( objDonador )
+
+// - Con Ecmascript 6 no es necesario crear la funcion que barre las propiedades de un objeto asignandoselas a otro, simplemente se usa el metodo "Objet.assign" donde enviamos como parametros primero el "objReceptor" y luego el "objDonador", considerar que de esta manera tampoco se copian las definiciones "get"
+
+console.log( Object.assign( objReceptor, objDonador ) )
 
