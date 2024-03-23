@@ -1018,16 +1018,42 @@
 
 // - Pero con Ecmascript 6 podemos omitir el nombre del valor de la propiedad si es igual al nombre de la propiedad:
 
-function crearTitere( nombre, apellido, edad ) {
+// function crearTitere( nombre, apellido, edad ) {
 
-  return {
-    nombre,
-    apellido,
-    edad
+//   return {
+//     nombre,
+//     apellido,
+//     edad
+//   }
+
+// }
+
+// let patana = crearTitere( "Patana", "Tufillo", 20 )
+
+// console.log( patana )
+
+/* -----------------------------------------------------------------
+                     Metodos concisos en objetos
+----------------------------------------------------------------- */
+
+// - En Ecmascript 5 definimos los metodos en los objetos como un valor de funcion de una propiedad:
+
+// var titere = {
+//   nombre: "Tulio",
+//   // - Propiedad "getNombre" con valor de funcion, esto es un metodo de objeto
+//   getNombre: function() {
+//     console.log( this.nombre )
+//   }
+// }
+
+// - En Ecmascript 6 no es necesario declarar la palabra reservada "function" al momento de crear el metodo:
+
+var titere = {
+  nombre: "Tulio",
+  // - La propiedad "getNombre" es en si misma la funcion, esto es un metodo de objeto en Ecmascript 6
+  getNombre() {
+    console.log( this.nombre )
   }
-
 }
 
-let patana = crearTitere( "Patana", "Tufillo", 20 )
-
-console.log( patana )
+titere.getNombre()
