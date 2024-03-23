@@ -764,8 +764,8 @@
 // - Acá "simulamos" el "this" usando "call", declarando "this" con un valor que fue creado con el operador "new", la idea es crear otro objeto de tipo "Persona", pero en realidad lo que terminamos haciendo es actualizar el valor del objeto "persona" y por lo tanto nuestra funcion "Persona" no logra lanzar el error que identifica si la llamada a la funcion fue con "new", esto es un problema
 // var noEsPersona = Persona.call( persona, "Bodoque")
 
-console.log( persona ) // Persona {nombre: 'Bodoque'}
-console.log( noEsPersona ) // undefined
+// console.log( persona ) // Persona {nombre: 'Bodoque'}
+// console.log( noEsPersona ) // undefined
 
 // - Para resolver este problema en Ecmascript 6 se creo una "meta propiedad" llamada "new.target"
 
@@ -773,19 +773,48 @@ console.log( noEsPersona ) // undefined
 
 // - En palabras mas sencillas, si queremos evaluar si una funcion fue creada con el operador "new" debemos usar "new.target"
 
-function Persona( nombre ) {
+// function Persona( nombre ) {
 
-  console.log( this )
+//   console.log( this )
 
-  if( typeof new.target !== 'undefined' ) {
-    this.nombre = nombre
-  } else {
-    throw new Error('La funcion "Persona", debe ser invocada con el operador "new"')
-  }
+//   if( typeof new.target !== 'undefined' ) {
+//     this.nombre = nombre
+//   } else {
+//     throw new Error('La funcion "Persona", debe ser invocada con el operador "new"')
+//   }
 
-}
+// }
 
-var persona = new Persona("Tulio")
+// var persona = new Persona("Tulio")
 
-// - Ahora si lanzara el error, ya que esta invocacion no se esta creando con el operador "new"
-var noEsPersona = Persona.call( persona, "Bodoque")
+// // - Ahora si lanzara el error, ya que esta invocacion no se esta creando con el operador "new"
+// var noEsPersona = Persona.call( persona, "Bodoque")
+
+/* -----------------------------------------------------------------
+              Arrow Functions - Funciones de Flecha
+----------------------------------------------------------------- */
+
+// - Este tipo de funciones tienen una sintaxis variada que depende de lo que quieras realizar, pero normalmente tienen la misma estructura:
+
+// - 1. Funcion con argumentos
+// - 2. Seguido de una "flecha gorda" =>
+// - 3. Seguido del cuerpo de la funcion
+
+// - ¿Para que sirven?
+
+// - De manera muy generica:
+
+// - 1. Menos codigo que es mas simple de interpretar
+// - 2. No hay un nuevo "this" dentro de las funciones
+// - 3. No hay constructores, no tiene "new"
+// - 4. No puedes cambiar el valor del "this" aunque uses "call()", "apply()" o "bind()"
+// - 5. No hay objeto "arguments"
+
+// - Tecnicamente hablando, son funciones definidas con una nueva sintaxis que usa una flecha "=>", pero se comportan de una forma muy diferente a las funciones normales en Ecmascript 5:
+
+// - 1. No hay creacion de "this, super, arguments y new.target"
+// - 2. No pueden ser llamadas con "new"
+// - 3. No tienen "prototype"
+// - 4. No pueden cambiar el valor de "this"
+// - 5. No hay objeto "arguments"
+// - 6. No pueden tener nombres de parametros duplicados
