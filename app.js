@@ -1246,34 +1246,61 @@
 // - Abstraccion
 // - Poliformismo
 
-let gato = {
-  sonido(){
-    console.log( "Miau!" )
-  },
-  chillido(){
-    console.log( "MIAU!!!" )
+// let gato = {
+//   sonido(){
+//     console.log( "Miau!" )
+//   },
+//   chillido(){
+//     console.log( "MIAU!!!" )
+//   }
+// }
+
+// let perro = {
+//   sonido(){
+//     console.log( "Guau!" )
+//   }
+// }
+
+// // - Creo un objeto "angora" a partir del prototipo "gato"
+// let angora = Object.create( gato )
+// console.log( Object.getPrototypeOf( angora ) === gato ) // true
+
+// angora.sonido() // Miau!
+// angora.chillido() // MIAU!!!
+
+// // - En Ecmascript 6 podemos asignar el prototipo a un objeto desde otro objeto con el metodo Object.setPrototypeOf:
+
+// // - Como primer parametro recibe el objeto que va a tener el prototipo del objeto del segundo parametro
+// Object.setPrototypeOf( angora, perro )
+
+// console.log( Object.getPrototypeOf( angora ) === gato ) // False
+
+// angora.sonido() // Guau!
+// angora.chillido() // Uncaught TypeError: angora.chillido is not a function
+
+/* -----------------------------------------------------------------
+       Acceso al prototipo del padre con la referencia 'SUPER'
+----------------------------------------------------------------- */
+
+// - En Ecmascript 5 era complicado hacer el llamado a un metodo de una funcion que esta heredada de un objeto que viene del prototipo, en otras palabras, era complicado llamar metodos que vienen heredados de los prototipos
+
+let persona = {
+  saludar(){
+    return "Hola"
   }
 }
 
-let perro = {
-  sonido(){
-    console.log( "Guau!" )
+let amigo = {
+  saludar(){
+    // - En Ecmascript 5 habia que crear toda esta linea para poder acceder al metodo "saludar" del objeto "persona" y combinarlo con el metodo "saludar" del objeto "amigo"
+    // return Object.getPrototypeOf(this).saludar.call(this) + ", saludos!!!"
+
+    // - En Ecmascript 6 referenciamos al metodo "saludar" del objeto "persona" con la palabra reservada "super" y de esta manera podemos combinar el metodo anterior con el metodo "saludar" del objeto "amigo"
+    return super.saludar() + ", saludos!!!"
   }
 }
 
-// - Creo un objeto "angora" a partir del prototipo "gato"
-let angora = Object.create( gato )
-console.log( Object.getPrototypeOf( angora ) === gato ) // true
+// - Necesario para obtener los metodos de "persona" en "amigo"
+Object.setPrototypeOf( amigo, persona )
 
-angora.sonido() // Miau!
-angora.chillido() // MIAU!!!
-
-// - En Ecmascript 6 podemos asignar el prototipo a un objeto desde otro objeto con el metodo Object.setPrototypeOf:
-
-// - Como primer parametro recibe el objeto que va a tener el prototipo del objeto del segundo parametro
-Object.setPrototypeOf( angora, perro )
-
-console.log( Object.getPrototypeOf( angora ) === gato ) // False
-
-angora.sonido() // Guau!
-angora.chillido() // Uncaught TypeError: angora.chillido is not a function
+console.log( amigo.saludar() )
