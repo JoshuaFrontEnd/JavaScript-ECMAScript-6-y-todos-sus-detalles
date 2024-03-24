@@ -1309,15 +1309,15 @@
                     Desestructuracion de objetos
 ----------------------------------------------------------------- */
 
-let ajustes = {
-  nombre: "Tulio",
-  email: "tulio@gmail.com",
-  facebook: "tuliofb",
-  google: "tuliogoogle",
-  premium: true,
-  nuevaPropiedad: true,
-  "propiedad especial": true
-}
+// let ajustes = {
+//   nombre: "Tulio",
+//   email: "tulio@gmail.com",
+//   facebook: "tuliofb",
+//   google: "tuliogoogle",
+//   premium: true,
+//   nuevaPropiedad: true,
+//   "propiedad especial": true
+// }
 
 // - En Ecmascript 5 cuando se necesitaba usar mucho una propiedad de un objeto se almacenaban esas propiedades en variables:
 
@@ -1366,6 +1366,46 @@ let ajustes = {
 
 // - Si por alguna razon, tenemos un nombre de propiedad con espacios, debemos si o si asignarle un alias para poder usarla:
 
-let { "propiedad especial": propiedadEspecial } = ajustes
+// let { "propiedad especial": propiedadEspecial } = ajustes
 
-console.log( propiedadEspecial ) // True
+// console.log( propiedadEspecial ) // True
+
+/* -----------------------------------------------------------------
+              Desestructuracion de objetos anidados
+----------------------------------------------------------------- */
+
+let autoGuardado = {
+  archivo: "app.js",
+  cursor: {
+    linea: 7,
+    columna: 16
+  },
+  ultimoArchivo: {
+    archivo: "index.html",
+    cursor: {
+      linea: 8,
+      columna: 20
+    }
+  },
+  otroNodo: {
+    subNodo: {
+      cursor: {
+        linea: 11,
+        columna: 11
+      }
+    }
+  }
+}
+
+// - Supongamos que necesito obtener los valores del "cursor" del "subNodo" del "otroNodo":
+
+// - Con desestructuracion:
+let { otroNodo: { subNodo: { cursor } } } = autoGuardado
+
+console.log( cursor ) // {linea: 11, columna: 11}
+
+// - O tambien podemos prescindir de la desestructuracion y acceder con notacion de punto directamete al valor solicitado y guardarlo en una variable:
+
+let cursorSubOtro = autoGuardado.otroNodo.subNodo.cursor
+
+console.log( cursorSubOtro ) // {linea: 11, columna: 11}
