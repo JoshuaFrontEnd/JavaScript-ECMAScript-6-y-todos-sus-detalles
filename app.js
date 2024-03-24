@@ -1374,38 +1374,84 @@
               Desestructuracion de objetos anidados
 ----------------------------------------------------------------- */
 
-let autoGuardado = {
-  archivo: "app.js",
-  cursor: {
-    linea: 7,
-    columna: 16
-  },
-  ultimoArchivo: {
-    archivo: "index.html",
-    cursor: {
-      linea: 8,
-      columna: 20
-    }
-  },
-  otroNodo: {
-    subNodo: {
-      cursor: {
-        linea: 11,
-        columna: 11
-      }
-    }
-  }
-}
+// let autoGuardado = {
+//   archivo: "app.js",
+//   cursor: {
+//     linea: 7,
+//     columna: 16
+//   },
+//   ultimoArchivo: {
+//     archivo: "index.html",
+//     cursor: {
+//       linea: 8,
+//       columna: 20
+//     }
+//   },
+//   otroNodo: {
+//     subNodo: {
+//       cursor: {
+//         linea: 11,
+//         columna: 11
+//       }
+//     }
+//   }
+// }
 
 // - Supongamos que necesito obtener los valores del "cursor" del "subNodo" del "otroNodo":
 
 // - Con desestructuracion:
-let { otroNodo: { subNodo: { cursor } } } = autoGuardado
+// let { otroNodo: { subNodo: { cursor } } } = autoGuardado
 
-console.log( cursor ) // {linea: 11, columna: 11}
+// console.log( cursor ) // {linea: 11, columna: 11}
 
 // - O tambien podemos prescindir de la desestructuracion y acceder con notacion de punto directamete al valor solicitado y guardarlo en una variable:
 
-let cursorSubOtro = autoGuardado.otroNodo.subNodo.cursor
+// let cursorSubOtro = autoGuardado.otroNodo.subNodo.cursor
 
-console.log( cursorSubOtro ) // {linea: 11, columna: 11}
+// console.log( cursorSubOtro ) // {linea: 11, columna: 11}
+
+/* -----------------------------------------------------------------
+                  Desestructuracion de arreglos
+----------------------------------------------------------------- */
+
+let frutas = [ "platano", "pera", "uva" ]
+
+// - En Ecmascript 6 tambien podemos desestructurar arreglos, pero una de las diferencias con respecto a la desestructuracion de objetos consiste en que aca el orden de las propiedades es secuencial, es decir, independiente de en que orden escriba los nombres de las variables desestructuradas, estas siempre traeran los valores en el orden en que estan declaradas en el array:
+
+// let [ fruta1, fruta2 ] = frutas
+
+// console.log( fruta1, fruta2 ) // platano pera
+
+// Para acceder al valor "uva" que se encuentra en la posicion 2 del array, sin tener que desestructurar las otras posiciones iniciales, debo asignar una coma por cada posicion no asignada:
+
+// let [ ,,fruta3 ] = frutas
+
+// console.log( fruta3 ) // uva
+
+// - La desestructuracion puede sobreescribir valores de variables ya creadas:
+
+// var otraFruta = "manzana"
+
+// var [ otraFruta ] = frutas
+
+// console.log( otraFruta ) // - Uno esperaria que el valor aca fuese "manzana", pero al usar el nombre de la variable "otraFruta" en la desestructuracion, se le asigno el valor del dato que se encuentra en la posicion 0 del array "frutas", el cual es "platano"
+
+// - Una ventaja que posee la desestructuracion es que nos permite sobre escribir valores de manera mas sencilla, por ejemplo, teniendo dos variables, me gustaria intercambiar sus valores, una alternativa para realizar esto sin la desestructuracion es de la siguiente manera:
+
+let a = 1
+let b = 2
+let temp
+
+// temp = a
+// a = b
+// b = temp
+
+// console.log( a )
+// console.log( b )
+
+// - Pero con desestructuracion la sintaxis es mas sencilla:
+
+[ a, b ] = [ b, a]
+
+console.log( a )
+console.log( b )
