@@ -790,6 +790,12 @@
 // // - Ahora si lanzara el error, ya que esta invocacion no se esta creando con el operador "new"
 // var noEsPersona = Persona.call( persona, "Bodoque")
 
+/* =================================================================
+
+ Sección 5: Funciones de Flecha - Arrow Functions
+
+================================================================= */
+
 /* -----------------------------------------------------------------
               Arrow Functions - Funciones de Flecha
 ----------------------------------------------------------------- */
@@ -992,6 +998,12 @@
 
 // ejemplo( 10, 20 )
 
+/* =================================================================
+
+ Sección 6: Adiciones a los objetos
+
+================================================================= */
+
 /* -----------------------------------------------------------------
       Simplificando la declaracion de propiedades en objetos
 ----------------------------------------------------------------- */
@@ -1179,38 +1191,38 @@
 // - Todas las llaves tipo "string" van ordenadas en la manera que fueron agregadas al objeto
 // - Todos los simbolos en el orden que fueron agregados al objeto
 
-var objeto = {
-  c: 1,
-  0: 1,
-  x: 1,
-  15: 1,
-  r: 1,
-  3: 1,
-  b: 1
-}
+// var objeto = {
+//   c: 1,
+//   0: 1,
+//   x: 1,
+//   15: 1,
+//   r: 1,
+//   3: 1,
+//   b: 1
+// }
 
-objeto.d = 1
-objeto["2"] = 1
-objeto["a"] = 1
+// objeto.d = 1
+// objeto["2"] = 1
+// objeto["a"] = 1
 
 // - El resultado seria: 0,2,3,15,c,x,r,b,d,a, es decir, los numeros ordenados de manera ascendente y las letras "string" ordenadas en la manera que fueron agregadas:
 
-console.log( Object.getOwnPropertyNames( objeto ).join(",") )
+// console.log( Object.getOwnPropertyNames( objeto ).join(",") )
 // 0,2,3,15,c,x,r,b,d,a
 
 // - Una alternativa que muestra los nombres de las propiedades "keys" en un arreglo:
 
-console.log( Object.keys( objeto ) )
+// console.log( Object.keys( objeto ) )
 // ['0', '2', '3', '15', 'c', 'x', 'r', 'b', 'd', 'a']
 
 // - Con el metodo "stringify" de JSON:
 
-console.log( JSON.stringify( objeto ) )
+// console.log( JSON.stringify( objeto ) )
 // {"0":1,"2":1,"3":1,"15":1,"c":1,"x":1,"r":1,"b":1,"d":1,"a":1}
 
 // - Con un ciclo ForIn:
 
-for ( i in Object.keys( objeto ) ) {
-  console.log( Object.keys( objeto )[ i ] )
-}
+// for ( i in Object.keys( objeto ) ) {
+//   console.log( Object.keys( objeto )[ i ] )
+// }
 // 0 2 3 15 c x r b d a
