@@ -1284,23 +1284,88 @@
 
 // - En Ecmascript 5 era complicado hacer el llamado a un metodo de una funcion que esta heredada de un objeto que viene del prototipo, en otras palabras, era complicado llamar metodos que vienen heredados de los prototipos
 
-let persona = {
-  saludar(){
-    return "Hola"
-  }
+// let persona = {
+//   saludar(){
+//     return "Hola"
+//   }
+// }
+
+// let amigo = {
+//   saludar(){
+//     // - En Ecmascript 5 habia que crear toda esta linea para poder acceder al metodo "saludar" del objeto "persona" y combinarlo con el metodo "saludar" del objeto "amigo"
+//     // return Object.getPrototypeOf(this).saludar.call(this) + ", saludos!!!"
+
+//     // - En Ecmascript 6 referenciamos al metodo "saludar" del objeto "persona" con la palabra reservada "super" y de esta manera podemos combinar el metodo anterior con el metodo "saludar" del objeto "amigo"
+//     return super.saludar() + ", saludos!!!"
+//   }
+// }
+
+// // - Necesario para obtener los metodos de "persona" en "amigo"
+// Object.setPrototypeOf( amigo, persona )
+
+// console.log( amigo.saludar() )
+
+/* -----------------------------------------------------------------
+                    Desestructuracion de objetos
+----------------------------------------------------------------- */
+
+let ajustes = {
+  nombre: "Tulio",
+  email: "tulio@gmail.com",
+  facebook: "tuliofb",
+  google: "tuliogoogle",
+  premium: true,
+  nuevaPropiedad: true,
+  "propiedad especial": true
 }
 
-let amigo = {
-  saludar(){
-    // - En Ecmascript 5 habia que crear toda esta linea para poder acceder al metodo "saludar" del objeto "persona" y combinarlo con el metodo "saludar" del objeto "amigo"
-    // return Object.getPrototypeOf(this).saludar.call(this) + ", saludos!!!"
+// - En Ecmascript 5 cuando se necesitaba usar mucho una propiedad de un objeto se almacenaban esas propiedades en variables:
 
-    // - En Ecmascript 6 referenciamos al metodo "saludar" del objeto "persona" con la palabra reservada "super" y de esta manera podemos combinar el metodo anterior con el metodo "saludar" del objeto "amigo"
-    return super.saludar() + ", saludos!!!"
-  }
-}
+// var nombre = ajustes.nombre,
+//     email = ajustes.email,
+//     facebook = ajustes.facebook
 
-// - Necesario para obtener los metodos de "persona" en "amigo"
-Object.setPrototypeOf( amigo, persona )
+// console.log( nombre, email, facebook )
 
-console.log( amigo.saludar() )
+// - Ahora con Ecmascript 6 para evitar hacer lo anterior podemos desestructurar los objetos de la siguiente manera:
+
+// let { nombre, email, facebook } = ajustes
+
+// console.log( nombre, email, facebook )
+
+// - El orden de las propiedades es irrelevante al desestructurar, lo que unico que importa, es que los nombres sean referenciados con el mismo nombre que poseen en el objeto:
+
+// let { facebook, email, nombre } = ajustes
+
+// console.log( nombre, email, facebook )
+
+// - De esta manera podemos crear alias para los nombres de las propiedades, por ejemplo que la propiedad "premium" sea referenciada como "dePago", al crear un alias, el nombre inicial pierde la referencia en la desestructuracion:
+
+// let { premium:dePago } = ajustes
+
+// console.log( dePago ) // True
+// console.log( premium ) // Uncaught ReferenceError: premium is not defined
+
+// - La desestructuracion tambien nos permite inicializar propiedades que no existan en el objeto inicial, al inicializarlas estaran disponibles desde la desestructuracion pero estas no seran agregadas al objeto de donde han sido extraidas las demas
+
+// let { facebook, email, nombr, twitter = "Tuliotwitter" } = ajustes
+
+// console.log( twitter, ajustes )
+
+// - Tambien podemos combinar la inicializacion de una propiedad que no exista en el objeto inicial, asignandole un alias y un valor:
+
+// let { google, twitter:cuentaTwi = "Tuliotwitter" } = ajustes
+
+// console.log( cuentaTwi ) // Tuliotwitter
+
+// - Pero si intentamos asignarle un valor a una propiedad que ya existe en el objeto, esta mantendra su valor inicial, ya que desde la desestructuracion no podemos sobreescribir valores:
+
+// let { nuevaPropiedad = false } = ajustes
+
+// console.log( nuevaPropiedad ) // True
+
+// - Si por alguna razon, tenemos un nombre de propiedad con espacios, debemos si o si asignarle un alias para poder usarla:
+
+let { "propiedad especial": propiedadEspecial } = ajustes
+
+console.log( propiedadEspecial ) // True
