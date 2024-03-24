@@ -1148,24 +1148,69 @@
 
 // }
 
-var objReceptor = {}
-var objDonador = {
-  nombre: "Tulio",
-  apellido: "Triviño",
-  // - La unica observacion que si definimos un metodo "getter" no sera copiado en el objeto receptor y solo se obtendra el valor del metodo:
-  get profesion(){
-    return "Conductor"
-  }
-}
+// var objReceptor = {}
+// var objDonador = {
+//   nombre: "Tulio",
+//   apellido: "Triviño",
+//   // - La unica observacion que si definimos un metodo "getter" no sera copiado en el objeto receptor y solo se obtendra el valor del metodo:
+//   get profesion(){
+//     return "Conductor"
+//   }
+// }
 
 // - Se copian todas las propiedades, menos las definiciones "get" del "objDonador" al objeto "objReceptor"
 // console.log( mezclar( objReceptor, objDonador ) )
 
 // - Solo el "objDonador" posee las definicones "get"
 
-console.log( objDonador )
+// console.log( objDonador )
 
 // - Con Ecmascript 6 no es necesario crear la funcion que barre las propiedades de un objeto asignandoselas a otro, simplemente se usa el metodo "Objet.assign" donde enviamos como parametros primero el "objReceptor" y luego el "objDonador", considerar que de esta manera tampoco se copian las definiciones "get"
 
-console.log( Object.assign( objReceptor, objDonador ) )
+// console.log( Object.assign( objReceptor, objDonador ) )
 
+/* -----------------------------------------------------------------
+       Orden de enumeracion de las propiedades de los objetos
+----------------------------------------------------------------- */
+
+// - En Ecmascript 5 el orden de la propiedades de los objetos dependia un poco del navegador, con Ecmascript 6 esto se soluciono definiendo caracteristicas que definen el orden de las propiedades:
+
+// - Todas las llaves en orden ascendente
+// - Todas las llaves tipo "string" van ordenadas en la manera que fueron agregadas al objeto
+// - Todos los simbolos en el orden que fueron agregados al objeto
+
+var objeto = {
+  c: 1,
+  0: 1,
+  x: 1,
+  15: 1,
+  r: 1,
+  3: 1,
+  b: 1
+}
+
+objeto.d = 1
+objeto["2"] = 1
+objeto["a"] = 1
+
+// - El resultado seria: 0,2,3,15,c,x,r,b,d,a, es decir, los numeros ordenados de manera ascendente y las letras "string" ordenadas en la manera que fueron agregadas:
+
+console.log( Object.getOwnPropertyNames( objeto ).join(",") )
+// 0,2,3,15,c,x,r,b,d,a
+
+// - Una alternativa que muestra los nombres de las propiedades "keys" en un arreglo:
+
+console.log( Object.keys( objeto ) )
+// ['0', '2', '3', '15', 'c', 'x', 'r', 'b', 'd', 'a']
+
+// - Con el metodo "stringify" de JSON:
+
+console.log( JSON.stringify( objeto ) )
+// {"0":1,"2":1,"3":1,"15":1,"c":1,"x":1,"r":1,"b":1,"d":1,"a":1}
+
+// - Con un ciclo ForIn:
+
+for ( i in Object.keys( objeto ) ) {
+  console.log( Object.keys( objeto )[ i ] )
+}
+// 0 2 3 15 c x r b d a
