@@ -1226,3 +1226,54 @@
 //   console.log( Object.keys( objeto )[ i ] )
 // }
 // 0 2 3 15 c x r b d a
+
+/* =================================================================
+
+ Sección 7: Prototipos mas poderosos y desestructuracion
+
+================================================================= */
+
+/* -----------------------------------------------------------------
+          Cambiar el prototipo de un objeto: setPrototypeOf
+----------------------------------------------------------------- */
+
+// - La Programacion Orientada a Objetos de Javascript se encontraba basada en prototipos y no en clases ( Ecmascript 6 introduce las clases )
+
+// - Los prototipos son un conjunto de normas para integrar POO en Javascript. Pero con los prototipos somos capaces de realizar tareas como:
+
+// - Herencia
+// - Encapsulamiento
+// - Abstraccion
+// - Poliformismo
+
+let gato = {
+  sonido(){
+    console.log( "Miau!" )
+  },
+  chillido(){
+    console.log( "MIAU!!!" )
+  }
+}
+
+let perro = {
+  sonido(){
+    console.log( "Guau!" )
+  }
+}
+
+// - Creo un objeto "angora" a partir del prototipo "gato"
+let angora = Object.create( gato )
+console.log( Object.getPrototypeOf( angora ) === gato ) // true
+
+angora.sonido() // Miau!
+angora.chillido() // MIAU!!!
+
+// - En Ecmascript 6 podemos asignar el prototipo a un objeto desde otro objeto con el metodo Object.setPrototypeOf:
+
+// - Como primer parametro recibe el objeto que va a tener el prototipo del objeto del segundo parametro
+Object.setPrototypeOf( angora, perro )
+
+console.log( Object.getPrototypeOf( angora ) === gato ) // False
+
+angora.sonido() // Guau!
+angora.chillido() // Uncaught TypeError: angora.chillido is not a function
