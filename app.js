@@ -1471,10 +1471,44 @@
 
 // Asignar el primer valor del arreglo como "colorPrincipal", el segundo como "colorSecundario", y los demas colores "esparcirlos" en un nuevo arreglo:
 
-let colores2 = [ "rojo", "verde", "amarillo", "morado", "naranja"]
+// let colores2 = [ "rojo", "verde", "amarillo", "morado", "naranja"]
 
-let [ colorPrincipal, colorSecundario, ...spreadDeColores ] = colores2
+// let [ colorPrincipal, colorSecundario, ...spreadDeColores ] = colores2
 
-console.log( colorPrincipal )
-console.log( colorSecundario )
-console.log( spreadDeColores )
+// console.log( colorPrincipal )
+// console.log( colorSecundario )
+// console.log( spreadDeColores )
+
+/* -----------------------------------------------------------------
+            Valores por defecto en la desestructuracion
+----------------------------------------------------------------- */
+
+let frutas1 = [ "platano" ]
+
+// - Puedo asignar un valor "por defecto" a las variables que no tienen valores declarados en el arreglo del que quiero extraer los datos:
+// let [ fruta1, fruta2 = "manzana" ] = frutas1
+
+// console.log( fruta1, fruta2 ) //platano manzana
+
+// - Pero no puedo asignar valores por defecto a las variables que si tienen valores declarados en el arreglo del que quiero extraer los datos:
+
+// - Aca "fruta1" mantendra el valor de "platano" ya que ese fue el valor por defecto declarado en el arreglo "frutas1"
+let [ fruta1 = "pera", fruta2 = "manzana" ] = frutas1
+
+console.log( fruta1, fruta2 ) //platano manzana
+
+// - Los valores por defecto en la desestructuracion funcionan tanto como para los objetos como los arreglos:
+
+let titere = {
+	nombre: "Tulio"
+}
+
+// let { nombre, apellido = "Triviño" } = titere
+
+// console.log( nombre, apellido ) // Tulio Triviño
+
+let { nombre = "Policarpio", apellido = "Triviño" } = titere
+
+console.log( nombre, apellido ) // Tulio Triviño
+
+
