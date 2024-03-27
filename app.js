@@ -1414,7 +1414,7 @@
                   Desestructuracion de arreglos
 ----------------------------------------------------------------- */
 
-let frutas = [ "platano", "pera", "uva" ]
+// let frutas = [ "platano", "pera", "uva" ]
 
 // - En Ecmascript 6 tambien podemos desestructurar arreglos, pero una de las diferencias con respecto a la desestructuracion de objetos consiste en que aca el orden de las propiedades es secuencial, es decir, independiente de en que orden escriba los nombres de las variables desestructuradas, estas siempre traeran los valores en el orden en que estan declaradas en el array:
 
@@ -1438,9 +1438,9 @@ let frutas = [ "platano", "pera", "uva" ]
 
 // - Una ventaja que posee la desestructuracion es que nos permite sobre escribir valores de manera mas sencilla, por ejemplo, teniendo dos variables, me gustaria intercambiar sus valores, una alternativa para realizar esto sin la desestructuracion es de la siguiente manera:
 
-let a = 1
-let b = 2
-let temp
+// let a = 1
+// let b = 2
+// let temp
 
 // temp = a
 // a = b
@@ -1451,7 +1451,30 @@ let temp
 
 // - Pero con desestructuracion la sintaxis es mas sencilla:
 
-[ a, b ] = [ b, a]
+// [ a, b ] = [ b, a]
 
-console.log( a )
-console.log( b )
+// console.log( a )
+// console.log( b )
+
+/* -----------------------------------------------------------------
+                Desestructuracion de arreglos anidados
+----------------------------------------------------------------- */
+
+// let colores1 = [ "rojo", ["verde", "amarillo"], "morado", "naranja"]
+
+// Obteniendo el valor rojo y el valor verde:
+
+// let [ color1, [ color2 ] ] = colores1
+
+// console.log( color1 )
+// console.log( color2 )
+
+// Asignar el primer valor del arreglo como "colorPrincipal", el segundo como "colorSecundario", y los demas colores "esparcirlos" en un nuevo arreglo:
+
+let colores2 = [ "rojo", "verde", "amarillo", "morado", "naranja"]
+
+let [ colorPrincipal, colorSecundario, ...spreadDeColores ] = colores2
+
+console.log( colorPrincipal )
+console.log( colorSecundario )
+console.log( spreadDeColores )
