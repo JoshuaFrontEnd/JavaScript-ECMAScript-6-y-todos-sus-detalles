@@ -1688,43 +1688,92 @@
 
 // - Resulta que si agregamos propiedades de tipo "Symbol()" estas no se mostraran en el ciclo ForIn:
 
-let id = Symbol.for( "id" )
-let activo = Symbol.for( "activo" )
+// let id = Symbol.for( "id" )
+// let activo = Symbol.for( "activo" )
 
-let titere = {
-  [id]: "123",
-  [activo]: true,
-  nombre: "Tulio",
-  apellido: "Triviño",
-  color: "rojo"
-}
+// let titere = {
+//   [id]: "123",
+//   [activo]: true,
+//   nombre: "Tulio",
+//   apellido: "Triviño",
+//   color: "rojo"
+// }
 
 // - Solo mostrara:
 // nombre Tulio
 // apellido Triviño
 // color rojo
 
-for ( key in titere ) {
-  console.log( key, titere[ key ] )
-}
+// for ( key in titere ) {
+//   console.log( key, titere[ key ] )
+// }
 
 // - Incluso utilizando Object.keys tampoco mostrara las propiedades de tipo "Symbol()""
 
-console.log( Object.keys( titere ) ) // ['nombre', 'apellido', 'color']
+// console.log( Object.keys( titere ) ) // ['nombre', 'apellido', 'color']
 
 // - Para poder mostrar las propiedades de tipo "Symbol()" es necesario usar el metodo "Object.getOwnPropertySymbols":
 
-let simbolos = Object.getOwnPropertySymbols( titere )
-console.log( simbolos ) // [Symbol(id), Symbol(activo)]
+// let simbolos = Object.getOwnPropertySymbols( titere )
+// console.log( simbolos ) // [Symbol(id), Symbol(activo)]
 
 // - Luego podemos hacer un ForIn en "simbolos" para mostrar las propiedades de tipo "Symbol"
 
-for ( i in simbolos ) {
-  console.log( simbolos[ i ], Symbol.keyFor( simbolos[ i ] ) )
-}
+// for ( i in simbolos ) {
+//   console.log( simbolos[ i ], Symbol.keyFor( simbolos[ i ] ) )
+// }
 
 // Symbol(id) 'id'
 // Symbol(activo) 'activo'
+
+/* =================================================================
+
+ Sección 9: Sets
+
+================================================================= */
+
+/* -----------------------------------------------------------------
+       Creando Sets, agregando items y buscando elementos
+----------------------------------------------------------------- */
+
+// - El objeto Set le permite almacenar valores únicos de cualquier tipo, ya sea valores primitivos o referencias a objetos.
+
+// - Los objetos Set son colecciones de valores. Puede iterar a través de los elementos de un conjunto en orden de inserción. Un valor en un Set solo puede ocurrir una vez; es único en la colección del Set.
+
+// - Los Sets son como los arreglos, exceptuando que tienen funciones nativas en su prototipo y no pueden tener valores duplicados
+
+// - Creacion de un "Set":
+
+let items = new Set()
+
+// - Para agregar datos al "Set" usamos el metodo "add":
+
+items.add( 10 )
+items.add( 11 )
+items.add( 8 )
+items.add( 7 )
+
+console.log( items ) // Set(4) {10, 11, 8, 7}
+
+// - Si intentamos agregar un valor que ya fue agregado, "Set" simplemente lo ignorara:
+
+items.add( 7 ) // Esto es ignorado, ya que existe el valor de 7
+
+// - Para ver cuantos elementos se han agregado a "Set" podemos usar la propiedad "size"
+
+console.log( items.size ) // 4
+
+// - Podemos agregar valores a un objeto "Set" desde una coleccion de datos como un "array", pero considerando que los valores duplicados en el "array" seran ignorados en la creacion del "Set":
+
+let itemsArray = new Set( [ 1, 2, 3, 4, 5, 6, 7, 7, 7, 7, 7, 7] )
+
+console.log( itemsArray ) // Set(7) {1, 2, 3, 4, 5, 6, 7}
+console.log( itemsArray.size ) // 7
+
+// - Para saber si existe un valor especifo en el "Set" podemos buscarlo con el metodo "has" pasandole como argumento el valor a buscar:
+
+console.log( itemsArray.has( 7 ) ) // true
+
 
 
 
