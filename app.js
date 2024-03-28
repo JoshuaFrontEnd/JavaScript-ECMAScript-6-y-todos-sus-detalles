@@ -1588,16 +1588,16 @@
 
 // - Segun https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Symbol Los Symbols se utilizan a menudo para añadir claves de propiedades únicas a un objeto que no sean iguales a las claves que cualquier otro código pueda añadir al objeto, y que están ocultas de cualquier mecanismo que otro código utilice normalmente para acceder al objeto. Esto permite una forma de encapsulation débil, o una forma débil de ocultación de información. Se garantiza que cada llamada a Symbol() devuelve un único Symbol
 
-let primerNombre = Symbol()
-let persona = {}
+// let primerNombre = Symbol()
+// let persona = {}
 
-console.log( primerNombre ) // Symbol()
+// console.log( primerNombre ) // Symbol()
 
 // - Es importante entender que si queremos asignar una variable con valor "Symbol()" como propiedad al objeto "persona{}" debemos hacerlo mediante la notacion de corchetes
-persona[primerNombre] = 'Tulio'
+// persona[primerNombre] = 'Tulio'
 
 // - De esta manera el objeto quedaria asi:
-console.log( persona ) // {Symbol(): 'Tulio'}
+// console.log( persona ) // {Symbol(): 'Tulio'}
 
 // - En cambio si lo hacemos con la notacion de punto, creariamos una propiedad con el nombre literal de la variable y no con su valor "Symbol()"
 // persona.primerNombre = 'Tulio'
@@ -1605,33 +1605,74 @@ console.log( persona ) // {Symbol(): 'Tulio'}
 // console.log( persona ) // {primerNombre: 'Tulio'}
 
 // - Como usamos la notacion de corchetes para asignar instancias de variables con valor "Symbol()" si queremos visualizar el el valor de esa propiedad en el objeto "persona{}" usamos nuevamente esa notacion
-console.log( persona[primerNombre] ) // Tulio
+// console.log( persona[primerNombre] ) // Tulio
 
 // - Si usaramos la notacion de punto esto daria "undefined" ya que no hemos asignado ninguna propiedad con el nombre "primeraPersona"
-console.log( persona.primerNombre ) // undefined
+// console.log( persona.primerNombre ) // undefined
 
 // Podemos asignar alias a los simbolos, pasandolo como argumento al declarar un "Symbol()"
 
-let simbolo1 = Symbol( 'simbolo' )
-let simbolo2 = Symbol( 'simbolo' )
+// let simbolo1 = Symbol( 'simbolo' )
+// let simbolo2 = Symbol( 'simbolo' )
 
-console.log( simbolo1 ) // Symbol( 'simbolo' )
-console.log( simbolo2 ) // Symbol( 'simbolo' )
+// console.log( simbolo1 ) // Symbol( 'simbolo' )
+// console.log( simbolo2 ) // Symbol( 'simbolo' )
 
 // - Si bien, ambas variables "simbolo1" y "simbolo2", tienen como valor "Symbol( 'simbolo' )" no son iguales, esto es porque Javascript se asegura de que cada simbolo sea distinto, esa esa la logica de que exista "Symbol()" y esto lo podemos corroborar al usar 3 operadores de igualdad, los cuales daran en cada caso "false":
 
-console.log( simbolo1 == simbolo2 ) // false
-console.log( simbolo1 === simbolo2 ) // false
-console.log( Object.is( simbolo1, simbolo2 ) ) // false
+// console.log( simbolo1 == simbolo2 ) // false
+// console.log( simbolo1 === simbolo2 ) // false
+// console.log( Object.is( simbolo1, simbolo2 ) ) // false
 
 // - Una forma para saber que variables poseen simbolos es usar el operador "typeof"
 
-console.log( typeof primerNombre ) // symbol
+// console.log( typeof primerNombre ) // symbol
 
 // - Otro detalle a considerar es que los simbolos por ser valores de tipo primitivos no podran ser convertidos a "strings", por lo tanto no es posible contatenar texto con varibles que posean valor de "Symbol"
 
-console.log( "Mi simbolo: " + primerNombre ) // Uncaught TypeError: Cannot convert a Symbol value to a string
-console.log( `Mi simbolo: ${primerNombre}` ) // Uncaught TypeError: Cannot convert a Symbol value to a string
+// console.log( "Mi simbolo: " + primerNombre ) // Uncaught TypeError: Cannot convert a Symbol value to a string
+// console.log( `Mi simbolo: ${primerNombre}` ) // Uncaught TypeError: Cannot convert a Symbol value to a string
+
+/* -----------------------------------------------------------------
+       Compartiendo símbolos - Symbol.for() y Symbol.keyFor()
+----------------------------------------------------------------- */
+
+// - El método "Symbol.for(key)" busca los símbolos existentes en un registro de símbolos en tiempo de ejecución con la clave dada y lo devuelve si lo encuentra. En caso contrario, se crea un nuevo símbolo en el registro global de símbolos con esta clave:
+
+let userID = Symbol.for( "userId" )
+let objeto = {}
+
+objeto[userID] = "12345"
+
+console.log( objeto[userID] ) // 12345
+console.log( userID ) // Symbol(userId)
+
+let userID2 = Symbol.for( "userId" )
+
+console.log( userID == userID2 ) // true
+console.log( userID === userID2 ) // true
+console.log( Object.is( userID, userID2 ) ) // true
+
+console.log( objeto[userID2] ) // 12345
+console.log( userID2 ) // Symbol(userId)
+
+// - El método "Symbol.keyFor(sym)" recupera la clave de símbolo compartida del símbolo pasado como argumento desde el registro global de símbolos:
+
+let id = Symbol.for( "id unico" )
+console.log( Symbol.keyFor( id ) ) // id unico
+
+let id2 = Symbol.for( "id unico" )
+console.log( Symbol.keyFor( id2 ) ) // id unico
+
+console.log( id == id2 ) // true
+
+let id3 = Symbol( "id unico" )
+console.log( Symbol.keyFor( id3 ) ) // undefined
+
+
+
+
+
 
 
 
