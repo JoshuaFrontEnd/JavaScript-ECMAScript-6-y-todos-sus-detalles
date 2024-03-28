@@ -1838,19 +1838,50 @@
             Eliminar duplicados de un 'array' con 'Set'
 ----------------------------------------------------------------- */
 
-let numerosDuplicados = [ 1, 2, 3, 4, 5, 6, 7, 7, 7, 7, 3, 1, 2, 3, 4, 5 ]
+// let numerosDuplicados = [ 1, 2, 3, 4, 5, 6, 7, 7, 7, 7, 3, 1, 2, 3, 4, 5 ]
 
-let numerosSinDuplicados = eliminaDuplicados( numerosDuplicados )
+// let numerosSinDuplicados = eliminaDuplicados( numerosDuplicados )
 
-console.log( numerosSinDuplicados ) // (7) [1, 2, 3, 4, 5, 6, 7]
+// console.log( numerosSinDuplicados ) // (7) [1, 2, 3, 4, 5, 6, 7]
 
-function eliminaDuplicados( items ) {
+// function eliminaDuplicados( items ) {
 
-  return [ ... new Set( items ) ]
+//   return [ ... new Set( items ) ]
 
+// }
+
+/* ------------------------------------------------------------------
+                              WeakSets
+----------------------------------------------------------------- */
+
+// - Los objetos WeakSet son colecciones de objetos. Al igual que Set, cada objecto WeakSet puede estar solo una vez; todos los objetos en una colección WeakSet son unicos.
+
+// - Las principales diferencias con el objeto Set son que los WeakSet son colecciones de objetos solamente. No pueden contener valores arbitrarios de cualquier tipo, como pueden hacerlo los Set
+
+// - El principal uso de los "WeakSet" es para almacenar referencias a los objetos
+
+let weakSet = new WeakSet()
+
+let titere1 = {
+  nombre: "Bodoque"
 }
 
+let titere2 = {
+  nombre: "Policarpio"
+}
 
+weakSet.add( titere1 )
+weakSet.add( titere2 )
+
+console.log( weakSet ) // WeakSet {{ nombre: 'Bodoque' }, { nombre: 'Policarpio' }}
+
+// - Caracteristicas principales:
+
+// - 1. En un "WeakSet" los metodos "add", "has", "remove", dan un error si enviamos como parametro algo que no sea un objeto
+// - 2. No tiene manera de hacer repeticiones o ciclos "ForIn"
+// - 3. Los "WeakSet" no tienen "keys", "values", por lo que no hay manera via programacion, de saber cuantos elementos hay adentro
+// - 4. No tienen un "ForEach"
+// - 5- No tienen propiedad "size"
 
 
 
