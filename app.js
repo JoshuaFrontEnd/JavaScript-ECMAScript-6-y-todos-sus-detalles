@@ -1639,35 +1639,97 @@
 
 // - El método "Symbol.for(key)" busca los símbolos existentes en un registro de símbolos en tiempo de ejecución con la clave dada y lo devuelve si lo encuentra. En caso contrario, se crea un nuevo símbolo en el registro global de símbolos con esta clave:
 
-let userID = Symbol.for( "userId" )
-let objeto = {}
+// let userID = Symbol.for( "userId" )
+// let objeto = {}
 
-objeto[userID] = "12345"
+// objeto[userID] = "12345"
 
-console.log( objeto[userID] ) // 12345
-console.log( userID ) // Symbol(userId)
+// console.log( objeto[userID] ) // 12345
+// console.log( userID ) // Symbol(userId)
 
-let userID2 = Symbol.for( "userId" )
+// let userID2 = Symbol.for( "userId" )
 
-console.log( userID == userID2 ) // true
-console.log( userID === userID2 ) // true
-console.log( Object.is( userID, userID2 ) ) // true
+// console.log( userID == userID2 ) // true
+// console.log( userID === userID2 ) // true
+// console.log( Object.is( userID, userID2 ) ) // true
 
-console.log( objeto[userID2] ) // 12345
-console.log( userID2 ) // Symbol(userId)
+// console.log( objeto[userID2] ) // 12345
+// console.log( userID2 ) // Symbol(userId)
 
 // - El método "Symbol.keyFor(sym)" recupera la clave de símbolo compartida del símbolo pasado como argumento desde el registro global de símbolos:
 
-let id = Symbol.for( "id unico" )
-console.log( Symbol.keyFor( id ) ) // id unico
+// let id = Symbol.for( "id unico" )
+// console.log( Symbol.keyFor( id ) ) // id unico
 
-let id2 = Symbol.for( "id unico" )
-console.log( Symbol.keyFor( id2 ) ) // id unico
+// let id2 = Symbol.for( "id unico" )
+// console.log( Symbol.keyFor( id2 ) ) // id unico
 
-console.log( id == id2 ) // true
+// console.log( id == id2 ) // true
 
-let id3 = Symbol( "id unico" )
-console.log( Symbol.keyFor( id3 ) ) // undefined
+// let id3 = Symbol( "id unico" )
+// console.log( Symbol.keyFor( id3 ) ) // undefined
+
+
+/* -----------------------------------------------------------------
+              Recuperando las propiedades simbolo
+----------------------------------------------------------------- */
+
+// - Cuando queremos obtener todas las propiedades de un objeto podemos usar un ciclo ForIn:
+
+// let titere = {
+//   nombre: "Tulio",
+//   apellido: "Triviño",
+//   color: "rojo"
+// }
+
+// for ( key in titere ) {
+//   console.log( key, titere[ key ] )
+// }
+
+// - Resulta que si agregamos propiedades de tipo "Symbol()" estas no se mostraran en el ciclo ForIn:
+
+let id = Symbol.for( "id" )
+let activo = Symbol.for( "activo" )
+
+let titere = {
+  [id]: "123",
+  [activo]: true,
+  nombre: "Tulio",
+  apellido: "Triviño",
+  color: "rojo"
+}
+
+// - Solo mostrara:
+// nombre Tulio
+// apellido Triviño
+// color rojo
+
+for ( key in titere ) {
+  console.log( key, titere[ key ] )
+}
+
+// - Incluso utilizando Object.keys tampoco mostrara las propiedades de tipo "Symbol()""
+
+console.log( Object.keys( titere ) ) // ['nombre', 'apellido', 'color']
+
+// - Para poder mostrar las propiedades de tipo "Symbol()" es necesario usar el metodo "Object.getOwnPropertySymbols":
+
+let simbolos = Object.getOwnPropertySymbols( titere )
+console.log( simbolos ) // [Symbol(id), Symbol(activo)]
+
+// - Luego podemos hacer un ForIn en "simbolos" para mostrar las propiedades de tipo "Symbol"
+
+for ( i in simbolos ) {
+  console.log( simbolos[ i ], Symbol.keyFor( simbolos[ i ] ) )
+}
+
+// Symbol(id) 'id'
+// Symbol(activo) 'activo'
+
+
+
+
+
 
 
 
