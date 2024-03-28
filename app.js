@@ -1483,7 +1483,7 @@
             Valores por defecto en la desestructuracion
 ----------------------------------------------------------------- */
 
-let frutas1 = [ "platano" ]
+// let frutas1 = [ "platano" ]
 
 // - Puedo asignar un valor "por defecto" a las variables que no tienen valores declarados en el arreglo del que quiero extraer los datos:
 // let [ fruta1, fruta2 = "manzana" ] = frutas1
@@ -1493,22 +1493,83 @@ let frutas1 = [ "platano" ]
 // - Pero no puedo asignar valores por defecto a las variables que si tienen valores declarados en el arreglo del que quiero extraer los datos:
 
 // - Aca "fruta1" mantendra el valor de "platano" ya que ese fue el valor por defecto declarado en el arreglo "frutas1"
-let [ fruta1 = "pera", fruta2 = "manzana" ] = frutas1
+// let [ fruta1 = "pera", fruta2 = "manzana" ] = frutas1
 
-console.log( fruta1, fruta2 ) //platano manzana
+// console.log( fruta1, fruta2 ) //platano manzana
 
 // - Los valores por defecto en la desestructuracion funcionan tanto como para los objetos como los arreglos:
 
-let titere = {
-	nombre: "Tulio"
-}
+// let titere = {
+// 	nombre: "Tulio"
+// }
 
 // let { nombre, apellido = "Triviño" } = titere
 
 // console.log( nombre, apellido ) // Tulio Triviño
 
-let { nombre = "Policarpio", apellido = "Triviño" } = titere
+// let { nombre = "Policarpio", apellido = "Triviño" } = titere
 
-console.log( nombre, apellido ) // Tulio Triviño
+// console.log( nombre, apellido ) // Tulio Triviño
 
 
+/* -----------------------------------------------------------------
+          Desestructuracion de parametros en funciones
+----------------------------------------------------------------- */
+
+// - Al crear una funcion con parametros declarados dentro de la misma, no hay manera de saber si algun parametro es un objeto y que propiedades - metodos, posee ese objeto:
+
+// Por ejemplo creo una funcion llamada "crearJugador()" que recibe dos parametros "nickname" de tipo "string" y "opciones" de tipo "object":
+
+// function crearJugador( nickname, opciones ) {
+
+//   opciones = opciones || {}
+
+//   let hp = opciones.hp,
+//       sp = opciones.sp,
+//       clase = opciones.clase
+
+//   console.log( nickname, hp, sp, clase )
+
+// }
+
+// - Como yo cree la funcion conozco la estructura del objeto "opciones" por lo que se que argumentos tengo que setear:
+// crearJugador( "Frozen_Blast", { hp: 100, sp: 50, clase: "Mago" } )
+
+// Pero, a no ser que haya documentado la funcion no tengo forma de saber cuales son las propiedades - metodos del objeto opciones, tendria que ir especificamente a revisar el codigo donde se encuentra la funcion, para solventar esto, podemos aplicar una desestructuracion a los parametros que enviamos en una funcion, de esta manera quedo mucho mas claro que argumentos especificos necesito declarar al llamar la funcion
+
+// function crearJugador( nickname, { hp, sp, clase } ) {
+
+//   console.log( nickname, hp, sp, clase )
+
+// }
+
+// Si llamamos la funcion sin declarar argumentos para el parametro de tipo objeto, javascript nos dara un error ya que no puede desestructurar valores de un objeto con propiedades "undefined"
+
+// crearJugador( "Frozen_Blast" ) // Uncaught TypeError: Cannot destructure property 'hp' of 'undefined' as it is undefined.
+
+// Para resolver esto podemos aplicar un valor por defecto al objeto, es decir: si no viene declarado ningun argumento del objeto, el objeto sera un objeto vacio, por lo que se podra permitir definir valores "undefined"
+
+// function crearJugador( nickname, { hp, sp, clase } = {} ) {
+
+//   console.log( nickname, hp, sp, clase )
+
+// }
+
+// crearJugador( "Frozen_Blast" ) // Frozen_Blast undefined undefined undefined
+
+// Tambien podemos aplicar valores por defecto a cada propiedad del parametro objeto, estas propiedades tendran esos valores siempre y cuando no sean especificados como argumentos al momento de llamar la funcion:
+
+function crearJugador(
+  nickname,
+  { hp, sp, clase } = { hp: 100, sp: 50, clase: "Mago" }
+) {
+
+  console.log( nickname, hp, sp, clase )
+
+}
+
+crearJugador( "Frozen_Blast" ) // Frozen_Blast 100 50 Mago
+
+// Si declaro los argumentos que necesita el objeto sobreescribira sus valores por defecto:
+
+crearJugador( "Frozen_Blast", { hp: 500, sp: 100, clase: "Guerrero" } ) // Frozen_Blast 500 100 Guerrero
