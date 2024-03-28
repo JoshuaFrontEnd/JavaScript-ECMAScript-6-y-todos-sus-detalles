@@ -1824,15 +1824,31 @@
                   Convertir un 'Set' en un 'Array'
 ----------------------------------------------------------------- */
 
-let setNumeros = new Set([ 1, 2, 3, 4, 5, 6, 7 ])
+// let setNumeros = new Set([ 1, 2, 3, 4, 5, 6, 7 ])
 
-console.log( setNumeros ) // Set(7) {1, 2, 3, 4, 5, 6, 7}
+// console.log( setNumeros ) // Set(7) {1, 2, 3, 4, 5, 6, 7}
 
-// Convirtiendo "setNumeros" a un array:
+// // Convirtiendo "setNumeros" a un array:
 
-let arrayNumeros = [ ...setNumeros ]
+// let arrayNumeros = [ ...setNumeros ]
 
-console.log( arrayNumeros ) // (7) [1, 2, 3, 4, 5, 6, 7]
+// console.log( arrayNumeros ) // (7) [1, 2, 3, 4, 5, 6, 7]
+
+/* ------------------------------------------------------------------
+            Eliminar duplicados de un 'array' con 'Set'
+----------------------------------------------------------------- */
+
+let numerosDuplicados = [ 1, 2, 3, 4, 5, 6, 7, 7, 7, 7, 3, 1, 2, 3, 4, 5 ]
+
+let numerosSinDuplicados = eliminaDuplicados( numerosDuplicados )
+
+console.log( numerosSinDuplicados ) // (7) [1, 2, 3, 4, 5, 6, 7]
+
+function eliminaDuplicados( items ) {
+
+  return [ ... new Set( items ) ]
+
+}
 
 
 
