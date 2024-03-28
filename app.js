@@ -1559,17 +1559,83 @@
 
 // Tambien podemos aplicar valores por defecto a cada propiedad del parametro objeto, estas propiedades tendran esos valores siempre y cuando no sean especificados como argumentos al momento de llamar la funcion:
 
-function crearJugador(
-  nickname,
-  { hp, sp, clase } = { hp: 100, sp: 50, clase: "Mago" }
-) {
+// function crearJugador(
+//   nickname,
+//   { hp, sp, clase } = { hp: 100, sp: 50, clase: "Mago" }
+// ) {
 
-  console.log( nickname, hp, sp, clase )
+//   console.log( nickname, hp, sp, clase )
 
-}
+// }
 
-crearJugador( "Frozen_Blast" ) // Frozen_Blast 100 50 Mago
+// crearJugador( "Frozen_Blast" ) // Frozen_Blast 100 50 Mago
 
 // Si declaro los argumentos que necesita el objeto sobreescribira sus valores por defecto:
 
-crearJugador( "Frozen_Blast", { hp: 500, sp: 100, clase: "Guerrero" } ) // Frozen_Blast 500 100 Guerrero
+// crearJugador( "Frozen_Blast", { hp: 500, sp: 100, clase: "Guerrero" } ) // Frozen_Blast 500 100 Guerrero
+
+/* =================================================================
+
+ Sección 8: Simbolos
+
+================================================================= */
+
+/* -----------------------------------------------------------------
+                      Simbolos y propiedades
+----------------------------------------------------------------- */
+
+// - En Ecmascript 6 se han introducido los simbolos "symbol", los cuales son un nuevo tipo de dato unico y diferente, este se adiciona a los ya existentes: undefined, null, boolean, string, number, object, array
+
+// - Segun https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Symbol Los Symbols se utilizan a menudo para añadir claves de propiedades únicas a un objeto que no sean iguales a las claves que cualquier otro código pueda añadir al objeto, y que están ocultas de cualquier mecanismo que otro código utilice normalmente para acceder al objeto. Esto permite una forma de encapsulation débil, o una forma débil de ocultación de información. Se garantiza que cada llamada a Symbol() devuelve un único Symbol
+
+let primerNombre = Symbol()
+let persona = {}
+
+console.log( primerNombre ) // Symbol()
+
+// - Es importante entender que si queremos asignar una variable con valor "Symbol()" como propiedad al objeto "persona{}" debemos hacerlo mediante la notacion de corchetes
+persona[primerNombre] = 'Tulio'
+
+// - De esta manera el objeto quedaria asi:
+console.log( persona ) // {Symbol(): 'Tulio'}
+
+// - En cambio si lo hacemos con la notacion de punto, creariamos una propiedad con el nombre literal de la variable y no con su valor "Symbol()"
+// persona.primerNombre = 'Tulio'
+
+// console.log( persona ) // {primerNombre: 'Tulio'}
+
+// - Como usamos la notacion de corchetes para asignar instancias de variables con valor "Symbol()" si queremos visualizar el el valor de esa propiedad en el objeto "persona{}" usamos nuevamente esa notacion
+console.log( persona[primerNombre] ) // Tulio
+
+// - Si usaramos la notacion de punto esto daria "undefined" ya que no hemos asignado ninguna propiedad con el nombre "primeraPersona"
+console.log( persona.primerNombre ) // undefined
+
+// Podemos asignar alias a los simbolos, pasandolo como argumento al declarar un "Symbol()"
+
+let simbolo1 = Symbol( 'simbolo' )
+let simbolo2 = Symbol( 'simbolo' )
+
+console.log( simbolo1 ) // Symbol( 'simbolo' )
+console.log( simbolo2 ) // Symbol( 'simbolo' )
+
+// - Si bien, ambas variables "simbolo1" y "simbolo2", tienen como valor "Symbol( 'simbolo' )" no son iguales, esto es porque Javascript se asegura de que cada simbolo sea distinto, esa esa la logica de que exista "Symbol()" y esto lo podemos corroborar al usar 3 operadores de igualdad, los cuales daran en cada caso "false":
+
+console.log( simbolo1 == simbolo2 ) // false
+console.log( simbolo1 === simbolo2 ) // false
+console.log( Object.is( simbolo1, simbolo2 ) ) // false
+
+// - Una forma para saber que variables poseen simbolos es usar el operador "typeof"
+
+console.log( typeof primerNombre ) // symbol
+
+// - Otro detalle a considerar es que los simbolos por ser valores de tipo primitivos no podran ser convertidos a "strings", por lo tanto no es posible contatenar texto con varibles que posean valor de "Symbol"
+
+console.log( "Mi simbolo: " + primerNombre ) // Uncaught TypeError: Cannot convert a Symbol value to a string
+console.log( `Mi simbolo: ${primerNombre}` ) // Uncaught TypeError: Cannot convert a Symbol value to a string
+
+
+
+
+
+
+
