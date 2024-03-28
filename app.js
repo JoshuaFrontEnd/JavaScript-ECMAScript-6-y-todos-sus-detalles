@@ -1780,25 +1780,45 @@
 
 // - Para eliminar valores en un "Set" usamos el metodo "delete" pasandole como argumento el valor a eliminar:
 
-let itemsDelete = new Set( [ "manzana", "pera", "uva", "sandia", "melon"] )
+// let itemsDelete = new Set( [ "manzana", "pera", "uva", "sandia", "melon"] )
 
-console.log( itemsDelete ) // Set(5) {'manzana', 'pera', 'uva', 'sandia', 'melon'}
-console.log( itemsDelete.size ) // 5
+// console.log( itemsDelete ) // Set(5) {'manzana', 'pera', 'uva', 'sandia', 'melon'}
+// console.log( itemsDelete.size ) // 5
 
-// - Elimino el valor "uva"
+// // - Elimino el valor "uva"
 
-itemsDelete.delete( "uva" )
+// itemsDelete.delete( "uva" )
 
-console.log( itemsDelete ) // Set(4) {'manzana', 'pera', 'sandia', 'melon'}
-console.log( itemsDelete.size ) // 4
+// console.log( itemsDelete ) // Set(4) {'manzana', 'pera', 'sandia', 'melon'}
+// console.log( itemsDelete.size ) // 4
 
-// - Borrar todos los valores del "Set" con el metodo "clear"
+// // - Borrar todos los valores del "Set" con el metodo "clear"
 
-itemsDelete.clear()
+// itemsDelete.clear()
 
-console.log( itemsDelete ) // Set(0) {size: 0}
-console.log( itemsDelete.size ) // 0
+// console.log( itemsDelete ) // Set(0) {size: 0}
+// console.log( itemsDelete.size ) // 0
 
+/* ------------------------------------------------------------------
+                     Uso de forEach en los Sets
+----------------------------------------------------------------- */
+
+let titeres = new Set([ "Policarpio", "Juanin", "Bodoque" ])
+
+// - Al usar "forEach" en un "Set" la funcion que se pasa como argumento recibira como parametro, cada "valor" del "Set", la "llave" que sera igual al "valor" y el "setOriginal":
+
+titeres.forEach( function( valor, llave, setOriginal ) {
+
+  console.log( valor, llave, setOriginal )
+
+  console.log( titeres === setOriginal ) // true
+
+})
+
+// Output:
+// Policarpio Policarpio Set(3) {'Policarpio', 'Juanin', 'Bodoque'}
+// Juanin Juanin Set(3) {'Policarpio', 'Juanin', 'Bodoque'}
+// Bodoque Bodoque Set(3) {'Policarpio', 'Juanin', 'Bodoque'}
 
 
 
