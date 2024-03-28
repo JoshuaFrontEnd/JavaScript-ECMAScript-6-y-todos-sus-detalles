@@ -1744,35 +1744,64 @@
 
 // - Creacion de un "Set":
 
-let items = new Set()
+// let items = new Set()
 
 // - Para agregar datos al "Set" usamos el metodo "add":
 
-items.add( 10 )
-items.add( 11 )
-items.add( 8 )
-items.add( 7 )
+// items.add( 10 )
+// items.add( 11 )
+// items.add( 8 )
+// items.add( 7 )
 
-console.log( items ) // Set(4) {10, 11, 8, 7}
+// console.log( items ) // Set(4) {10, 11, 8, 7}
 
 // - Si intentamos agregar un valor que ya fue agregado, "Set" simplemente lo ignorara:
 
-items.add( 7 ) // Esto es ignorado, ya que existe el valor de 7
+// items.add( 7 ) // Esto es ignorado, ya que existe el valor de 7
 
 // - Para ver cuantos elementos se han agregado a "Set" podemos usar la propiedad "size"
 
-console.log( items.size ) // 4
+// console.log( items.size ) // 4
 
 // - Podemos agregar valores a un objeto "Set" desde una coleccion de datos como un "array", pero considerando que los valores duplicados en el "array" seran ignorados en la creacion del "Set":
 
-let itemsArray = new Set( [ 1, 2, 3, 4, 5, 6, 7, 7, 7, 7, 7, 7] )
+// let itemsArray = new Set( [ 1, 2, 3, 4, 5, 6, 7, 7, 7, 7, 7, 7] )
 
-console.log( itemsArray ) // Set(7) {1, 2, 3, 4, 5, 6, 7}
-console.log( itemsArray.size ) // 7
+// console.log( itemsArray ) // Set(7) {1, 2, 3, 4, 5, 6, 7}
+// console.log( itemsArray.size ) // 7
 
 // - Para saber si existe un valor especifo en el "Set" podemos buscarlo con el metodo "has" pasandole como argumento el valor a buscar:
 
-console.log( itemsArray.has( 7 ) ) // true
+// console.log( itemsArray.has( 7 ) ) // true
+
+/* ------------------------------------------------------------------
+                        Sets: Removiendo valores
+----------------------------------------------------------------- */
+
+// - Para eliminar valores en un "Set" usamos el metodo "delete" pasandole como argumento el valor a eliminar:
+
+let itemsDelete = new Set( [ "manzana", "pera", "uva", "sandia", "melon"] )
+
+console.log( itemsDelete ) // Set(5) {'manzana', 'pera', 'uva', 'sandia', 'melon'}
+console.log( itemsDelete.size ) // 5
+
+// - Elimino el valor "uva"
+
+itemsDelete.delete( "uva" )
+
+console.log( itemsDelete ) // Set(4) {'manzana', 'pera', 'sandia', 'melon'}
+console.log( itemsDelete.size ) // 4
+
+// - Borrar todos los valores del "Set" con el metodo "clear"
+
+itemsDelete.clear()
+
+console.log( itemsDelete ) // Set(0) {size: 0}
+console.log( itemsDelete.size ) // 0
+
+
+
+
 
 
 
