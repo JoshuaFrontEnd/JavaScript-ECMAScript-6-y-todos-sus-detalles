@@ -1860,20 +1860,20 @@
 
 // - El principal uso de los "WeakSet" es para almacenar referencias a los objetos
 
-let weakSet = new WeakSet()
+// let weakSet = new WeakSet()
 
-let titere1 = {
-  nombre: "Bodoque"
-}
+// let titere1 = {
+//   nombre: "Bodoque"
+// }
 
-let titere2 = {
-  nombre: "Policarpio"
-}
+// let titere2 = {
+//   nombre: "Policarpio"
+// }
 
-weakSet.add( titere1 )
-weakSet.add( titere2 )
+// weakSet.add( titere1 )
+// weakSet.add( titere2 )
 
-console.log( weakSet ) // WeakSet {{ nombre: 'Bodoque' }, { nombre: 'Policarpio' }}
+// console.log( weakSet ) // WeakSet {{ nombre: 'Bodoque' }, { nombre: 'Policarpio' }}
 
 // - Caracteristicas principales:
 
@@ -1883,7 +1883,57 @@ console.log( weakSet ) // WeakSet {{ nombre: 'Bodoque' }, { nombre: 'Policarpio'
 // - 4. No tienen un "ForEach"
 // - 5- No tienen propiedad "size"
 
+/* =================================================================
 
+ Sección 10: Maps
+
+================================================================= */
+
+/* -----------------------------------------------------------------
+                       Mapas y sus metodos
+----------------------------------------------------------------- */
+
+// - Es un nuevo tipo de coleccion de datos tipo key-value ( llave - valor)
+
+// - Creacion de un objeto "Map"
+
+let mapa = new Map()
+
+// - Insertando un valor al objeto "Map"
+
+mapa.set( "nombre", "Tulio" )
+mapa.set( "edad", "31" )
+mapa.set( "apellido" )
+mapa.set()
+mapa.set( {}, { hola: "hola mundo" } )
+
+console.log( mapa )
+// Output:
+// Map(5) {'nombre' => 'Tulio', 'edad' => '31', 'apellido' => undefined, undefined => undefined, {…} => {…}}
+console.log( mapa.size ) // 5
+
+console.log( mapa.get( "nombre" ) ) // Tulio
+console.log( mapa.get( "edad" ) ) // 31
+
+console.log( mapa.has( "nombre" ) ) // true
+console.log( mapa.has( "apellido" ) ) // true
+
+mapa.delete( "nombre" )
+
+console.log( mapa.has( "nombre" ) ) // false
+console.log( mapa.get( "nombre" ) ) // undefined
+
+// - Eliminar solo el valor de una llave:
+
+mapa.set( "edad")
+
+console.log( mapa ) // Map(4) {'edad' => undefined, 'apellido' => undefined, undefined => undefined, {…} => {…}}
+
+// - Borrar todos los datos de "mapa":
+
+mapa.clear()
+
+console.log( mapa ) // Map(0) {size: 0}
 
 
 
