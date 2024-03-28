@@ -1803,22 +1803,37 @@
                      Uso de forEach en los Sets
 ----------------------------------------------------------------- */
 
-let titeres = new Set([ "Policarpio", "Juanin", "Bodoque" ])
+// let titeres = new Set([ "Policarpio", "Juanin", "Bodoque" ])
 
 // - Al usar "forEach" en un "Set" la funcion que se pasa como argumento recibira como parametro, cada "valor" del "Set", la "llave" que sera igual al "valor" y el "setOriginal":
 
-titeres.forEach( function( valor, llave, setOriginal ) {
+// titeres.forEach( function( valor, llave, setOriginal ) {
 
-  console.log( valor, llave, setOriginal )
+//   console.log( valor, llave, setOriginal )
 
-  console.log( titeres === setOriginal ) // true
+//   console.log( titeres === setOriginal ) // true
 
-})
+// })
 
 // Output:
 // Policarpio Policarpio Set(3) {'Policarpio', 'Juanin', 'Bodoque'}
 // Juanin Juanin Set(3) {'Policarpio', 'Juanin', 'Bodoque'}
 // Bodoque Bodoque Set(3) {'Policarpio', 'Juanin', 'Bodoque'}
+
+/* ------------------------------------------------------------------
+                  Convertir un 'Set' en un 'Array'
+----------------------------------------------------------------- */
+
+let setNumeros = new Set([ 1, 2, 3, 4, 5, 6, 7 ])
+
+console.log( setNumeros ) // Set(7) {1, 2, 3, 4, 5, 6, 7}
+
+// Convirtiendo "setNumeros" a un array:
+
+let arrayNumeros = [ ...setNumeros ]
+
+console.log( arrayNumeros ) // (7) [1, 2, 3, 4, 5, 6, 7]
+
 
 
 
