@@ -2214,35 +2214,76 @@
 
 // - Los metodos computados son metodos cuyo nombre se pueden definir a traves de una variable, es decir que el nombre puede depender de algun resultado o calculo
 
-let metodoComputado = "nombreDinamico";
+// let metodoComputado = "nombreDinamico";
 
-class Titere {
+// class Titere {
 
-  constructor( nombre ){
-    this.nombre = nombre
+//   constructor( nombre ){
+//     this.nombre = nombre
+//   }
+
+//   decirNombre(){
+//     console.log( this.nombre )
+//   }
+
+//   [ metodoComputado ](){
+//     console.log( this.nombre.toUpperCase() )
+//   }
+
+//   // - Los metodos estaticos son llamados sin instanciar su clase, es decir, no hay que inicializar una variable para poder usar esa funcion. Se definen con la clave "static". Es importante que los metodos estaticos sean autonomos y que no requieran ninguna propiedad de la misma clase
+//   static crear( nombre ){
+//     return new Titere( nombre )
+//   }
+
+// }
+
+// // - Podemos llamar el metodo "crear()" de la clase "Titere" sin usar el operador "new", ya que fue declarado "static"
+// let tulio = Titere.crear( "Tulio" )
+
+// console.log( tulio ) // Titere {nombre: 'Tulio'}
+// tulio.nombreDinamico() // TULIO
+
+/* -----------------------------------------------------------------
+                Herencia de las clases - Extends
+----------------------------------------------------------------- */
+
+// - La herencia no es mas que transferirle metodos y propiedades a un hijo
+
+class Rectangulo {
+
+  constructor( alto, largo ){
+    this.alto = alto
+    this.largo = largo
   }
 
-  decirNombre(){
-    console.log( this.nombre )
-  }
-
-  [ metodoComputado ](){
-    console.log( this.nombre.toUpperCase() )
-  }
-
-  // - Los metodos estaticos son llamados sin instanciar su clase, es decir, no hay que inicializar una variable para poder usar esa funcion. Se definen con la clave "static". Es importante que los metodos estaticos sean autonomos y que no requieran ninguna propiedad de la misma clase
-  static crear( nombre ){
-    return new Titere( nombre )
+  getArea(){
+    return this.alto * this.largo
   }
 
 }
 
-// - Podemos llamar el metodo "crear()" de la clase "Titere" sin usar el operador "new", ya que fue declarado "static"
-let tulio = Titere.crear( "Tulio" )
+let rectangulo = new Rectangulo( 3, 2 )
 
-console.log( tulio ) // Titere {nombre: 'Tulio'}
-tulio.nombreDinamico() // TULIO
+console.log( rectangulo.getArea() ) // 6
 
+// - Podemos reutilizar los metodos de la clase "Rectangulo" en otra clase, usando la clave "extends", esta clave nos permite crear una subclase a partir de otra, al hacer esto la subclase heredara los metodos y propiedades de la clase padre
+
+class Cuadrado extends Rectangulo {
+
+  constructor( alto ){
+    // - Podemos hacer referencia al constructor de la clase padre con la clave "super"
+    super( alto, alto )
+  }
+
+}
+
+let cuadrado = new Cuadrado( 3 )
+
+console.log( cuadrado.getArea() ) // 9
+
+// - Podemos comprobar las instancias usando el operador "instanceof"
+console.log( cuadrado instanceof Cuadrado ) // true
+console.log( cuadrado instanceof Rectangulo ) // true
 
 
 
