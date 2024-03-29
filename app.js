@@ -2037,31 +2037,59 @@
 
 // - Para determinar una clase, se definio la convencion de que las funciones comenzaran con la primera letra mayuscula
 
-function Miclase( nombre ) {
+// function Miclase( nombre ) {
 
-  // - Para definir propiedades se usaba la clave "this":
-  this.nombre = nombre
+//   // - Para definir propiedades se usaba la clave "this":
+//   this.nombre = nombre
 
-  // - Para definir metodos se usaba el prototype:
-  this.gritarNombre = function(){
+//   // - Para definir metodos se usaba el prototype:
+//   this.gritarNombre = function(){
+//     console.log( this.nombre.toUpperCase() )
+//   }
+
+// }
+
+// - Tambien se pueden definir metodos afuera de la funcion:
+// Miclase.prototype.decirNombre = function(){
+//   console.log( this.nombre )
+// }
+
+// - Para crear una instancia de la clase se usaba el operador "new"
+// let tulio = new Miclase( "Tulio" )
+
+// tulio.gritarNombre()
+// tulio.decirNombre()
+
+// - El problema con este codigo, es que es sumamente volatil, en el sentido de que si no existe una documentacion, otro programador no sabria como aplicarlo, por ejemplo, no hay una definicion especifica, o no esta implicito en el codigo, sobre como aplicar propiedades, metodos y crear instancias, mas alla de los comentarios y convenciones, esto es un ejemplo muy sencillo pero con funciones mas complejas puede ser bastante complicado y dificil de manejar
+
+/* -----------------------------------------------------------------
+         Declaracion basica de una clase en Ecmascript 6
+----------------------------------------------------------------- */
+
+// - En Ecmascript 6 con el soporte nativo de clases esto se simplifica de sobremanera, para definir una clase usamos la declaracion "class" y se mantiene la convencion/estandar de que el nombre de la clase posea la primera letra con mayuscula
+
+class Miclase {
+
+  // - Todas las clases poseen un metodo especial llamado "constructor" el cual se encarga de definir las propiedades de la clase, no es obligatorio declararlo, pero su declaracion permite inicializar valores por defecto
+  constructor( nombre ){
+    this.nombre = nombre
+  }
+
+  // - Los metodos son definidos despues de especificar el "constructor"
+  decirNombre(){
+    console.log( this.nombre )
+  }
+
+  gritarNombre(){
     console.log( this.nombre.toUpperCase() )
   }
 
 }
 
-// - Tambien se pueden definir metodos afuera de la funcion:
-Miclase.prototype.decirNombre = function(){
-  console.log( this.nombre )
-}
-
-// - Para crear una instancia de la clase se usaba el operador "new"
 let tulio = new Miclase( "Tulio" )
 
 tulio.gritarNombre()
 tulio.decirNombre()
-
-// - El problema con este codigo, es que es sumamente volatil, en el sentido de que si no existe una documentacion, otro programador no sabria como aplicarlo, por ejemplo, no hay una definicion especifica, o no esta implicito en el codigo, sobre como aplicar propiedades, metodos y crear instancias, mas alla de los comentarios y convenciones, esto es un ejemplo muy sencillo pero con funciones mas complejas puede ser bastante complicado y dificil de manejar
-
 
 
 
