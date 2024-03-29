@@ -2275,6 +2275,14 @@ class Cuadrado extends Rectangulo {
     super( alto, alto )
   }
 
+  // - Podemos sobreescribir metodos de la clase padre ,re declarandolos en la clase hijo
+  getArea(){
+    console.log("sobreescribi el metodo de la clase padre")
+
+    // - Pero si necesitamos aun asi usar el mismo metodo de la clase padre podemos referenciarlo con la clave "super"
+    return super.getArea()
+  }
+
 }
 
 let cuadrado = new Cuadrado( 3 )
