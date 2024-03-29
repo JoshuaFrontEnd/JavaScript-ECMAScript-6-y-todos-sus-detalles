@@ -2029,6 +2029,41 @@
 
 // - Las clases poseen herencia, es decir, pueden heredar sus metodos y propiedades a otras clases, un ejemplo seria que si tenemos una clase llamada "forma" con las propiedades de lados y area, estas propiedades podrian heredarlas otras clases, por ejemplo una clase llamada "cuadrado" u otra clase llamada "rectangulo"
 
+/* -----------------------------------------------------------------
+                     Introduccion a las clases
+----------------------------------------------------------------- */
+
+// - En Ecmascript 5 y versiones anteriores Javascript no manejaba el concepto de clase, por lo que algunos programadores "emulaban" clases utilizando prototipos y el operador "new" que permite crear instancias de objetos
+
+// - Para determinar una clase, se definio la convencion de que las funciones comenzaran con la primera letra mayuscula
+
+function Miclase( nombre ) {
+
+  // - Para definir propiedades se usaba la clave "this":
+  this.nombre = nombre
+
+  // - Para definir metodos se usaba el prototype:
+  this.gritarNombre = function(){
+    console.log( this.nombre.toUpperCase() )
+  }
+
+}
+
+// - Tambien se pueden definir metodos afuera de la funcion:
+Miclase.prototype.decirNombre = function(){
+  console.log( this.nombre )
+}
+
+// - Para crear una instancia de la clase se usaba el operador "new"
+let tulio = new Miclase( "Tulio" )
+
+tulio.gritarNombre()
+tulio.decirNombre()
+
+// - El problema con este codigo, es que es sumamente volatil, en el sentido de que si no existe una documentacion, otro programador no sabria como aplicarlo, por ejemplo, no hay una definicion especifica, o no esta implicito en el codigo, sobre como aplicar propiedades, metodos y crear instancias, mas alla de los comentarios y convenciones, esto es un ejemplo muy sencillo pero con funciones mas complejas puede ser bastante complicado y dificil de manejar
+
+
+
 
 
 
