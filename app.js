@@ -1941,9 +1941,27 @@
 
 // - Para inicializar los datos en un objeto "Map" se deben definir parametros de "clave/valor" en formato de arrays dentro de un array:
 
+// let mapa = new Map([ ["Nombre", "Tulio"], ["edad", "31"] ])
+
+// console.log( mapa ) // Map(2) {'Nombre' => 'Tulio', 'edad' => '31'}
+
+/* -----------------------------------------------------------------
+                       forEach de los mapas
+----------------------------------------------------------------- */
+
+// - Podemos obtener los valores de un mapa usando forEach, la funcion interna del forEach recibira como parametros, el valor, llave y el mapa original:
+
 let mapa = new Map([ ["Nombre", "Tulio"], ["edad", "31"] ])
 
-console.log( mapa ) // Map(2) {'Nombre' => 'Tulio', 'edad' => '31'}
+mapa.forEach( function( key, value, originalMap ) {
+
+  console.log( `Llave: ${key}, Valor: ${value}` )
+
+})
+
+// Output:
+// Llave: Tulio, Valor: Nombre
+// Llave: 31, Valor: edad
 
 
 
