@@ -2002,17 +2002,32 @@
 // Esto dara error por que "Map" no puede tener valores repetidos:
 // let titeresMap = new Map([ ["nombre", "Tulio"], ["nombre", "Patana"] ])
 
-let titeresMap = new Map([ ["nombre", "Tulio"], ["apellido", "Triviño"] ])
+// let titeresMap = new Map([ ["nombre", "Tulio"], ["apellido", "Triviño"] ])
 
-for ( const titere of titeresMap ) {
-  console.log( titere )
-}
+// for ( const titere of titeresMap ) {
+//   console.log( titere )
+// }
 // Output:
 // (2) ['nombre', 'Tulio']
 // (2) ['apellido', 'Triviño']
 
+/* =================================================================
 
+ Sección 11: Clases
 
+================================================================= */
+
+/* -----------------------------------------------------------------
+                   Pre-introduccion a las clases
+----------------------------------------------------------------- */
+
+// - Las clases son una abstraccion de algun objeto de la vida real
+
+// - Todas las clases poseen propiedades, por ejemplo podemos tener una clase llamada "carro" y sus propiedades serian las caracteristicas que definen a "carro": puertas, color, marca, modelo, fabricante, etc
+
+// - Todas las clases poseen metodos, es decir, acciones/funciones que pueden ejecutar las clases, en el caso de la clase "carro" sus metodos serian: encender(), apagar(), acelerar(), etc
+
+// - Las clases poseen herencia, es decir, pueden heredar sus metodos y propiedades a otras clases, un ejemplo seria que si tenemos una clase llamada "forma" con las propiedades de lados y area, estas propiedades podrian heredarlas otras clases, por ejemplo una clase llamada "cuadrado" u otra clase llamada "rectangulo"
 
 
 
