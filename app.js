@@ -2152,56 +2152,96 @@
 
 // - La definicion completa de una clase puede ser enviada como parametro de una función:
 
-function creadorClases( definicionClase ) {
-  return new definicionClase()
-}
+// function creadorClases( definicionClase ) {
+//   return new definicionClase()
+// }
 
-let objeto = creadorClases( class{
+// let objeto = creadorClases( class{
 
-  constructor(){
-    this.nombre = undefined
-    this.edad = 30
-  }
+//   constructor(){
+//     this.nombre = undefined
+//     this.edad = 30
+//   }
 
-  saludar(){
-    console.log( "Hola!" )
-  }
+//   saludar(){
+//     console.log( "Hola!" )
+//   }
 
-})
+// })
 
-objeto.saludar() // Hola!
+// objeto.saludar() // Hola!
 
 // - Los valores retornados de algun metodo definido en una clase pueden ser enviados como parametros de una función
 
-class Cuadrado {
+// class Cuadrado {
 
-  constructor( lado ){
-    this.lado = lado
+//   constructor( lado ){
+//     this.lado = lado
+//   }
+
+//   getArea(){
+//     return this.lado * this.lado
+//   }
+
+// }
+
+// function imprimirCuadrado( classTypeCuadrado ) {
+
+//   // - Aca podemos validar que la clase recibida como parametro sea del tipo necesario, en este caso de tipo "Cuadrado"
+//   if ( !( classTypeCuadrado instanceof Cuadrado ) ){
+//     console.error( "El parametro enviado no es de la clase Cuadrado" )
+//     return
+//   }
+
+//   console.log( classTypeCuadrado.getArea() )
+
+// }
+
+// let mesa = new Cuadrado( 10 )
+// let mesaNoCuadrado = "123"
+
+// imprimirCuadrado( mesa )
+
+/* =================================================================
+
+ Sección 12: Profundizando en las clases
+
+================================================================= */
+
+/* -----------------------------------------------------------------
+            Metodos estaticos y metodos computados
+----------------------------------------------------------------- */
+
+// - Los metodos computados son metodos cuyo nombre se pueden definir a traves de una variable, es decir que el nombre puede depender de algun resultado o calculo
+
+let metodoComputado = "nombreDinamico";
+
+class Titere {
+
+  constructor( nombre ){
+    this.nombre = nombre
   }
 
-  getArea(){
-    return this.lado * this.lado
+  decirNombre(){
+    console.log( this.nombre )
+  }
+
+  [ metodoComputado ](){
+    console.log( this.nombre.toUpperCase() )
+  }
+
+  // - Los metodos estaticos son llamados sin instanciar su clase, es decir, no hay que inicializar una variable para poder usar esa funcion. Se definen con la clave "static". Es importante que los metodos estaticos sean autonomos y que no requieran ninguna propiedad de la misma clase
+  static crear( nombre ){
+    return new Titere( nombre )
   }
 
 }
 
-function imprimirCuadrado( classTypeCuadrado ) {
+// - Podemos llamar el metodo "crear()" de la clase "Titere" sin usar el operador "new", ya que fue declarado "static"
+let tulio = Titere.crear( "Tulio" )
 
-  // - Aca podemos validar que la clase recibida como parametro sea del tipo necesario, en este caso de tipo "Cuadrado"
-  if ( !( classTypeCuadrado instanceof Cuadrado ) ){
-    console.error( "El parametro enviado no es de la clase Cuadrado" )
-    return
-  }
-
-  console.log( classTypeCuadrado.getArea() )
-
-}
-
-let mesa = new Cuadrado( 10 )
-let mesaNoCuadrado = "123"
-
-imprimirCuadrado( mesa )
-
+console.log( tulio ) // Titere {nombre: 'Tulio'}
+tulio.nombreDinamico() // TULIO
 
 
 
