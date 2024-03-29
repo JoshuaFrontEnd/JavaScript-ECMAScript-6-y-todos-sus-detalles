@@ -1951,18 +1951,65 @@
 
 // - Podemos obtener los valores de un mapa usando forEach, la funcion interna del forEach recibira como parametros, el valor, llave y el mapa original:
 
-let mapa = new Map([ ["Nombre", "Tulio"], ["edad", "31"] ])
+// let mapa = new Map([ ["Nombre", "Tulio"], ["edad", "31"] ])
 
-mapa.forEach( function( key, value, originalMap ) {
+// mapa.forEach( function( key, value, originalMap ) {
 
-  console.log( `Llave: ${key}, Valor: ${value}` )
+//   console.log( `Llave: ${key}, Valor: ${value}` )
 
-})
+// })
 
 // Output:
 // Llave: Tulio, Valor: Nombre
 // Llave: 31, Valor: edad
 
+/* -----------------------------------------------------------------
+                       Ciclo ForOf
+----------------------------------------------------------------- */
+
+// let titeres = [
+//   { nombre: "Tulio", edad: 31 },
+//   { nombre: "Patana", edad: 18 },
+//   { nombre: "Juanin", edad: 20 },
+//   { nombre: "Guantecillo", edad: 59 },
+//   { nombre: "Cindy", edad: 28 },
+// ]
+
+// for ( const titere of titeres ) {
+//   console.log( titere.nombre, titere.edad )
+// }
+// Output:
+// Tulio 31
+// Patana 18
+// Juanin 20
+// Guantecillo 59
+// Cindy 28
+
+// let titeresSet = new Set()
+
+// titeresSet.add({ nombre: "Tulio", edad: 31 })
+// titeresSet.add({ nombre: "Patana", edad: 18 })
+// titeresSet.add({ nombre: "Juanin", edad: 20 })
+
+// for ( const titere of titeresSet ) {
+//   console.log( titere.nombre, titere.edad )
+// }
+// Output:
+// Tulio 31
+// Patana 18
+// Juanin 20
+
+// Esto dara error por que "Map" no puede tener valores repetidos:
+// let titeresMap = new Map([ ["nombre", "Tulio"], ["nombre", "Patana"] ])
+
+let titeresMap = new Map([ ["nombre", "Tulio"], ["apellido", "Triviño"] ])
+
+for ( const titere of titeresMap ) {
+  console.log( titere )
+}
+// Output:
+// (2) ['nombre', 'Tulio']
+// (2) ['apellido', 'Triviño']
 
 
 
