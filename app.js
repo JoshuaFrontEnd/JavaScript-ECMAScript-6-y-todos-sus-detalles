@@ -2103,6 +2103,52 @@
 // - 6. Intentar renombrar el nombre de la clase dentro de algun metodo de la misma dara error
 // - 7. Tienen metodos estaticos y privados
 
+/* -----------------------------------------------------------------
+                       Clases como expresiones
+----------------------------------------------------------------- */
+
+// - Las clases al igual que las funciones pueden definirse como expresiones, es decir, que pueden ser asignadas a variables:
+
+// - Expresion de funcion:
+
+let miFuncion = function() {
+  console.log( "Hola mundo" )
+}
+
+let otraFuncion = miFuncion
+
+console.log( typeof otraFuncion ) // function
+
+otraFuncion() // Hola mundo
+
+// - Expresion de clase:
+
+let Miclase = class {
+
+  constructor(){
+
+    this.nombre = ""
+    this.edad = 30
+    this.direccion = "Lorem ipsum dolor sit amet"
+
+  }
+
+  decirNombre(){
+    console.log( "Hola mundo" )
+  }
+
+}
+
+let tulio = new Miclase()
+
+tulio.decirNombre() // Hola mundo
+
+console.log( typeof tulio ) // Object
+console.log( tulio instanceof Miclase ) // true
+
+
+
+
 
 
 
