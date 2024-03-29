@@ -2111,43 +2111,96 @@
 
 // - Expresion de funcion:
 
-let miFuncion = function() {
-  console.log( "Hola mundo" )
+// let miFuncion = function() {
+//   console.log( "Hola mundo" )
+// }
+
+// let otraFuncion = miFuncion
+
+// console.log( typeof otraFuncion ) // function
+
+// otraFuncion() // Hola mundo
+
+// // - Expresion de clase:
+
+// let Miclase = class {
+
+//   constructor(){
+
+//     this.nombre = ""
+//     this.edad = 30
+//     this.direccion = "Lorem ipsum dolor sit amet"
+
+//   }
+
+//   decirNombre(){
+//     console.log( "Hola mundo" )
+//   }
+
+// }
+
+// let tulio = new Miclase()
+
+// tulio.decirNombre() // Hola mundo
+
+// console.log( typeof tulio ) // Object
+// console.log( tulio instanceof Miclase ) // true
+
+/* -----------------------------------------------------------------
+                       Clases como parametros
+----------------------------------------------------------------- */
+
+// - La definicion completa de una clase puede ser enviada como parametro de una función:
+
+function creadorClases( definicionClase ) {
+  return new definicionClase()
 }
 
-let otraFuncion = miFuncion
-
-console.log( typeof otraFuncion ) // function
-
-otraFuncion() // Hola mundo
-
-// - Expresion de clase:
-
-let Miclase = class {
+let objeto = creadorClases( class{
 
   constructor(){
-
-    this.nombre = ""
+    this.nombre = undefined
     this.edad = 30
-    this.direccion = "Lorem ipsum dolor sit amet"
-
   }
 
-  decirNombre(){
-    console.log( "Hola mundo" )
+  saludar(){
+    console.log( "Hola!" )
+  }
+
+})
+
+objeto.saludar() // Hola!
+
+// - Los valores retornados de algun metodo definido en una clase pueden ser enviados como parametros de una función
+
+class Cuadrado {
+
+  constructor( lado ){
+    this.lado = lado
+  }
+
+  getArea(){
+    return this.lado * this.lado
   }
 
 }
 
-let tulio = new Miclase()
+function imprimirCuadrado( classTypeCuadrado ) {
 
-tulio.decirNombre() // Hola mundo
+  // - Aca podemos validar que la clase recibida como parametro sea del tipo necesario, en este caso de tipo "Cuadrado"
+  if ( !( classTypeCuadrado instanceof Cuadrado ) ){
+    console.error( "El parametro enviado no es de la clase Cuadrado" )
+    return
+  }
 
-console.log( typeof tulio ) // Object
-console.log( tulio instanceof Miclase ) // true
+  console.log( classTypeCuadrado.getArea() )
 
+}
 
+let mesa = new Cuadrado( 10 )
+let mesaNoCuadrado = "123"
 
+imprimirCuadrado( mesa )
 
 
 
