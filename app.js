@@ -1897,43 +1897,53 @@
 
 // - Creacion de un objeto "Map"
 
-let mapa = new Map()
+// let mapa = new Map()
 
 // - Insertando un valor al objeto "Map"
 
-mapa.set( "nombre", "Tulio" )
-mapa.set( "edad", "31" )
-mapa.set( "apellido" )
-mapa.set()
-mapa.set( {}, { hola: "hola mundo" } )
+// mapa.set( "nombre", "Tulio" )
+// mapa.set( "edad", "31" )
+// mapa.set( "apellido" )
+// mapa.set()
+// mapa.set( {}, { hola: "hola mundo" } )
 
-console.log( mapa )
+// console.log( mapa )
 // Output:
 // Map(5) {'nombre' => 'Tulio', 'edad' => '31', 'apellido' => undefined, undefined => undefined, {…} => {…}}
-console.log( mapa.size ) // 5
+// console.log( mapa.size ) // 5
 
-console.log( mapa.get( "nombre" ) ) // Tulio
-console.log( mapa.get( "edad" ) ) // 31
+// console.log( mapa.get( "nombre" ) ) // Tulio
+// console.log( mapa.get( "edad" ) ) // 31
 
-console.log( mapa.has( "nombre" ) ) // true
-console.log( mapa.has( "apellido" ) ) // true
+// console.log( mapa.has( "nombre" ) ) // true
+// console.log( mapa.has( "apellido" ) ) // true
 
-mapa.delete( "nombre" )
+// mapa.delete( "nombre" )
 
-console.log( mapa.has( "nombre" ) ) // false
-console.log( mapa.get( "nombre" ) ) // undefined
+// console.log( mapa.has( "nombre" ) ) // false
+// console.log( mapa.get( "nombre" ) ) // undefined
 
 // - Eliminar solo el valor de una llave:
 
-mapa.set( "edad")
+// mapa.set( "edad")
 
-console.log( mapa ) // Map(4) {'edad' => undefined, 'apellido' => undefined, undefined => undefined, {…} => {…}}
+// console.log( mapa ) // Map(4) {'edad' => undefined, 'apellido' => undefined, undefined => undefined, {…} => {…}}
 
 // - Borrar todos los datos de "mapa":
 
-mapa.clear()
+// mapa.clear()
 
-console.log( mapa ) // Map(0) {size: 0}
+// console.log( mapa ) // Map(0) {size: 0}
+
+/* -----------------------------------------------------------------
+                  Inicializaciones de los mapas
+----------------------------------------------------------------- */
+
+// - Para inicializar los datos en un objeto "Map" se deben definir parametros de "clave/valor" en formato de arrays dentro de un array:
+
+let mapa = new Map([ ["Nombre", "Tulio"], ["edad", "31"] ])
+
+console.log( mapa ) // Map(2) {'Nombre' => 'Tulio', 'edad' => '31'}
 
 
 
