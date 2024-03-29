@@ -2068,29 +2068,40 @@
 
 // - En Ecmascript 6 con el soporte nativo de clases esto se simplifica de sobremanera, para definir una clase usamos la declaracion "class" y se mantiene la convencion/estandar de que el nombre de la clase posea la primera letra con mayuscula
 
-class Miclase {
+// class Miclase {
 
-  // - Todas las clases poseen un metodo especial llamado "constructor" el cual se encarga de definir las propiedades de la clase, no es obligatorio declararlo, pero su declaracion permite inicializar valores por defecto
-  constructor( nombre ){
-    this.nombre = nombre
-  }
+//   // - Todas las clases poseen un metodo especial llamado "constructor" el cual se encarga de definir las propiedades de la clase, no es obligatorio declararlo, pero su declaracion permite inicializar valores por defecto
+//   constructor( nombre ){
+//     this.nombre = nombre
+//   }
 
-  // - Los metodos son definidos despues de especificar el "constructor"
-  decirNombre(){
-    console.log( this.nombre )
-  }
+//   // - Los metodos son definidos despues de especificar el "constructor"
+//   decirNombre(){
+//     console.log( this.nombre )
+//   }
 
-  gritarNombre(){
-    console.log( this.nombre.toUpperCase() )
-  }
+//   gritarNombre(){
+//     console.log( this.nombre.toUpperCase() )
+//   }
 
-}
+// }
 
-let tulio = new Miclase( "Tulio" )
+// let tulio = new Miclase( "Tulio" )
 
-tulio.gritarNombre()
-tulio.decirNombre()
+// tulio.gritarNombre()
+// tulio.decirNombre()
 
+/* -----------------------------------------------------------------
+               ¿Por que usar la sintaxis de clase?
+----------------------------------------------------------------- */
+
+// - 1. Las clases funcionan muy parecido a la declaracion LET, solo estan ahi hasta que la ejecucion alcanza la declaracion
+// - 2. Todo el codigo dentro de la clases funciona en modo estricto "strict mode"
+// - 3. Todos los metodos no son enumerables
+// - 4. Todos los metodos internos, no tienen un constructor, por consecuencia no se pueden llamar con el operador "new"
+// - 5. Llamar una clase sin el "new" dara un error especifico de eso, por lo que sabremos que tendremos que declararlo si se nos olvida
+// - 6. Intentar renombrar el nombre de la clase dentro de algun metodo de la misma dara error
+// - 7. Tienen metodos estaticos y privados
 
 
 
