@@ -2311,22 +2311,54 @@
 
 // - En este ejemplo podemos ver una tarea asincrona que funciona con un setTimeout(), despues de 1300 milisegundos ejecutara un console.log y la funcion resolve(), el problema es que no hay forma de controlar este comportamiento desde fuera de la funcion, una solucion son las promesas
 
+// function tareaAsincrona(){
+
+//   setTimeout( function() {
+//     console.log( "Proceso Asincrono terminado" )
+//     resolve()
+//   }, 1300)
+
+// }
+
+// tareaAsincrona()
+
+// console.log("Codigo secuencial") // Esto se mostrara antes de tareaAsincrona()
+
+// function resolve() {
+//   console.log( "Todo OK!" )
+// }
+
+/* -----------------------------------------------------------------
+                       Promesas: Solucion
+----------------------------------------------------------------- */
+
+// - Con Ecmascript 6 se crea el concepto de Promesas, el objeto "Promise" representa la eventual finalización ( o falla ) de una operacion asincrona y su valor resultante:
+
 function tareaAsincrona(){
 
-  setTimeout( function() {
-    console.log( "Proceso Asincrono terminado" )
-    resolve()
-  }, 1300)
+  // - El objeto "Promise" recibe dos parametros: el primero es una funcion que se ejecuta cuando sucede todo correctamente, y el segundo es una funcion que se ejecuta cuando algo falla
+  // - Existe la convencion de llamar "resolve" a la funcion que se ejecuta cuando sucede todo correctamente, y la de nombrar "reject" a la funcion que se ejecuta cuando algo falla
+  let promesa = new Promise( ( resolve, reject ) => {
+
+    setTimeout( function() {
+      console.log( "Proceso Asincrono terminado" )
+      resolve()
+    }, 1300)
+
+  })
+
+  return promesa
 
 }
 
-tareaAsincrona()
+// - Para ejecutar la promesa llamamos la tarea asincrona y usando el metodo "then" declaramos los argumentos "resolve" y "reject", en ese orden
+tareaAsincrona().then(
+  function() { console.log( "Todo OK!" ) },
+  function() { console.log( "Todo mal!" ) }
+)
 
 console.log("Codigo secuencial") // Esto se mostrara antes de tareaAsincrona()
 
-function resolve() {
-  console.log( "Todo OK!" )
-}
 
 
 
