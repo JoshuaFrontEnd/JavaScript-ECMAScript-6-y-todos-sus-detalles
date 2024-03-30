@@ -2249,51 +2249,84 @@
 
 // - La herencia no es mas que transferirle metodos y propiedades a un hijo
 
-class Rectangulo {
+// class Rectangulo {
 
-  constructor( alto, largo ){
-    this.alto = alto
-    this.largo = largo
-  }
+//   constructor( alto, largo ){
+//     this.alto = alto
+//     this.largo = largo
+//   }
 
-  getArea(){
-    return this.alto * this.largo
-  }
+//   getArea(){
+//     return this.alto * this.largo
+//   }
+
+// }
+
+// let rectangulo = new Rectangulo( 3, 2 )
+
+// console.log( rectangulo.getArea() ) // 6
+
+// // - Podemos reutilizar los metodos de la clase "Rectangulo" en otra clase, usando la clave "extends", esta clave nos permite crear una subclase a partir de otra, al hacer esto la subclase heredara los metodos y propiedades de la clase padre
+
+// class Cuadrado extends Rectangulo {
+
+//   constructor( alto ){
+//     // - Podemos hacer referencia al constructor de la clase padre con la clave "super"
+//     super( alto, alto )
+//   }
+
+//   // - Podemos sobreescribir metodos de la clase padre ,re declarandolos en la clase hijo
+//   getArea(){
+//     console.log("sobreescribi el metodo de la clase padre")
+
+//     // - Pero si necesitamos aun asi usar el mismo metodo de la clase padre podemos referenciarlo con la clave "super"
+//     return super.getArea()
+//   }
+
+// }
+
+// let cuadrado = new Cuadrado( 3 )
+
+// console.log( cuadrado.getArea() ) // 9
+
+// // - Podemos comprobar las instancias usando el operador "instanceof"
+// console.log( cuadrado instanceof Cuadrado ) // true
+// console.log( cuadrado instanceof Rectangulo ) // true
+
+/* =================================================================
+
+ Sección 13: Promesas
+
+================================================================= */
+
+/* -----------------------------------------------------------------
+                       Promesas: Problematica
+----------------------------------------------------------------- */
+
+// - https://www.freecodecamp.org/news/synchronous-vs-asynchronous-in-javascript/
+// - https://developer.mozilla.org/es/docs/Learn/JavaScript/Asynchronous/Introducing
+// - https://www.arquitecturajava.com/javascript-sincrono-o-asincrono/
+
+// - Javascript originalmente siempre ha sido sincrono, es decir, todo va en secuencia, a pesar de eso hay algunas librerias de terceros y tecnologias que permiten la asincronia
+
+// - En este ejemplo podemos ver una tarea asincrona que funciona con un setTimeout(), despues de 1300 milisegundos ejecutara un console.log y la funcion resolve(), el problema es que no hay forma de controlar este comportamiento desde fuera de la funcion, una solucion son las promesas
+
+function tareaAsincrona(){
+
+  setTimeout( function() {
+    console.log( "Proceso Asincrono terminado" )
+    resolve()
+  }, 1300)
 
 }
 
-let rectangulo = new Rectangulo( 3, 2 )
+tareaAsincrona()
 
-console.log( rectangulo.getArea() ) // 6
+console.log("Codigo secuencial") // Esto se mostrara antes de tareaAsincrona()
 
-// - Podemos reutilizar los metodos de la clase "Rectangulo" en otra clase, usando la clave "extends", esta clave nos permite crear una subclase a partir de otra, al hacer esto la subclase heredara los metodos y propiedades de la clase padre
-
-class Cuadrado extends Rectangulo {
-
-  constructor( alto ){
-    // - Podemos hacer referencia al constructor de la clase padre con la clave "super"
-    super( alto, alto )
-  }
-
-  // - Podemos sobreescribir metodos de la clase padre ,re declarandolos en la clase hijo
-  getArea(){
-    console.log("sobreescribi el metodo de la clase padre")
-
-    // - Pero si necesitamos aun asi usar el mismo metodo de la clase padre podemos referenciarlo con la clave "super"
-    return super.getArea()
-  }
-
+function resolve() {
+  console.log( "Todo OK!" )
 }
-
-let cuadrado = new Cuadrado( 3 )
-
-console.log( cuadrado.getArea() ) // 9
-
-// - Podemos comprobar las instancias usando el operador "instanceof"
-console.log( cuadrado instanceof Cuadrado ) // true
-console.log( cuadrado instanceof Rectangulo ) // true
-
-
 
 
 
