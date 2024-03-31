@@ -2334,32 +2334,76 @@
 
 // - Con Ecmascript 6 se crea el concepto de Promesas, el objeto "Promise" representa la eventual finalización ( o falla ) de una operacion asincrona y su valor resultante:
 
-function tareaAsincrona(){
+// function tareaAsincrona(){
 
-  // - El objeto "Promise" recibe dos parametros: el primero es una funcion que se ejecuta cuando sucede todo correctamente, y el segundo es una funcion que se ejecuta cuando algo falla
-  // - Existe la convencion de llamar "resolve" a la funcion que se ejecuta cuando sucede todo correctamente, y la de nombrar "reject" a la funcion que se ejecuta cuando algo falla
-  let promesa = new Promise( ( resolve, reject ) => {
+//   // - El objeto "Promise" recibe dos parametros: el primero es una funcion que se ejecuta cuando sucede todo correctamente, y el segundo es una funcion que se ejecuta cuando algo falla
+//   // - Existe la convencion de llamar "resolve" a la funcion que se ejecuta cuando sucede todo correctamente, y la de nombrar "reject" a la funcion que se ejecuta cuando algo falla
+//   let promesa = new Promise( ( resolve, reject ) => {
 
-    setTimeout( function() {
-      console.log( "Proceso Asincrono terminado" )
-      resolve()
-    }, 1300)
+//     setTimeout( function() {
+//       console.log( "Proceso Asincrono terminado" )
+//       resolve()
+//     }, 1300)
 
-  })
+//   })
 
-  return promesa
+//   return promesa
+
+// }
+
+// - Para ejecutar la promesa llamamos la tarea asincrona y usando el metodo "then" declaramos los argumentos "resolve" y "reject", en ese orden
+// tareaAsincrona().then(
+//   function() { console.log( "Todo OK!" ) },
+//   function() { console.log( "Todo mal!" ) }
+// )
+
+// console.log("Codigo secuencial") // Esto se mostrara antes de tareaAsincrona()
+
+/* =================================================================
+
+ Seccion 14: Callbacks, promesas, await y async
+
+================================================================= */
+
+/* -----------------------------------------------------------------
+                           Callbacks
+----------------------------------------------------------------- */
+
+// - Una función de callback es una función que se pasa a otra función como un argumento, que luego se invoca dentro de la función externa para completar algún tipo de rutina o acción
+
+// - Se podria decir que los callbacks es la manera tradicional de realizar tareas asincronas, es decir, demoran la accion de una funcion, hasta que se realice una tarea antes
+
+const getUsuarioById = ( id, callback ) => {
+
+  const usuario = {
+    nombre: 'Tulio',
+    id
+  }
+
+  if ( id === 20 ) {
+
+    // - Seteando un error:
+    callback(`El usuario con el id: ${id}, no existe`)
+
+  } else {
+
+    // - Por convencion al llamar la funcion callback el primer parametro es el error y como segundo los adicionales que espera la funcion:
+    callback( null, usuario )
+  }
 
 }
 
-// - Para ejecutar la promesa llamamos la tarea asincrona y usando el metodo "then" declaramos los argumentos "resolve" y "reject", en ese orden
-tareaAsincrona().then(
-  function() { console.log( "Todo OK!" ) },
-  function() { console.log( "Todo mal!" ) }
-)
+// - Aca pasamos la funcion "callbackExample" sin ejecutarla, esta se ejecutara desde "getUsuarioById", esto es un callback
+getUsuarioById( 5, callbackExample  )
 
-console.log("Codigo secuencial") // Esto se mostrara antes de tareaAsincrona()
+function callbackExample( err, user ) {
 
+  if ( err ) {
+    return console.log( err )
+  }
 
+  console.log( 'Usuario de base de datos: ', user )
+}
 
 
 
