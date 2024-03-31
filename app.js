@@ -2557,26 +2557,90 @@
                        Ecmascript 7: Async
 ----------------------------------------------------------------- */
 
-const getNombre = async () => {
+// const getNombre = async () => {
 
-  return new Promise((resolve, reject) => {
+//   return new Promise((resolve, reject) => {
 
-    setTimeout(() => {
-      resolve('Tulio')
-    }, 3000 )
+//     setTimeout(() => {
+//       resolve('Tulio')
+//     }, 3000 )
 
-  })
+//   })
 
-}
+// }
 
-const saludo = async () => {
+// const saludo = async () => {
 
-  const nombre = await getNombre()
+//   const nombre = await getNombre()
 
-  return `Hola ${nombre}`
+//   return `Hola ${nombre}`
 
-}
+// }
 
-saludo().then( console.log )
+// saludo().then( console.log )
 
 // getNombre().then( console.log )
+
+/* -----------------------------------------------------------------
+                       Ejercicio Async/Await
+----------------------------------------------------------------- */
+
+const empleados = [{
+  id: 1,
+  nombre: 'Tulio'
+},{
+  id: 2,
+  nombre: 'Policarpio'
+},{
+  id: 3,
+  nombre: 'Bodoque'
+}]
+
+const salarios = [{
+  id: 1,
+  salario: 2000
+},{
+  id: 2,
+  salario: 1000
+}]
+
+const getEmpleado = async ( id ) => {
+
+  const empleadoDB = empleados.find( empleado => empleado.id === id )
+
+  if ( !empleadoDB ) {
+    throw new Error( `No existe empleado con el id: ${ id }` )
+  } else {
+    return empleadoDB
+  }
+
+}
+
+const getSalario = async ( empleado ) => {
+
+  const salariosDB = salarios.find( salario => salario.id === empleado.id )
+
+  if ( !salariosDB ) {
+    throw new Error( `No existe un salario para el empleado: ${ empleado.nombre }` )
+  } else {
+    return {
+      nombre: empleado.nombre,
+      salario: salariosDB.salario,
+      id: empleado.id
+    }
+  }
+
+}
+
+const getInformacion = async ( id ) => {
+
+  const empleado = await getEmpleado( id )
+  const resp = await getSalario( empleado )
+
+  return `${ empleado.nombre } tiene un salario de ${ resp.salario }`
+
+}
+
+getInformacion( 3 )
+  .then( console.log )
+  .catch( console.log )
