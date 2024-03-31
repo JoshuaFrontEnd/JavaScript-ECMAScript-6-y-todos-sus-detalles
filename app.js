@@ -2373,43 +2373,103 @@
 
 // - Se podria decir que los callbacks es la manera tradicional de realizar tareas asincronas, es decir, demoran la accion de una funcion, hasta que se realice una tarea antes
 
-const getUsuarioById = ( id, callback ) => {
+// const getUsuarioById = ( id, callback ) => {
 
-  const usuario = {
-    nombre: 'Tulio',
-    id
-  }
+//   const usuario = {
+//     nombre: 'Tulio',
+//     id
+//   }
 
-  if ( id === 20 ) {
+//   if ( id === 20 ) {
 
-    // - Seteando un error:
-    callback(`El usuario con el id: ${id}, no existe`)
+//     // - Seteando un error:
+//     callback(`El usuario con el id: ${id}, no existe`)
 
-  } else {
+//   } else {
 
-    // - Por convencion al llamar la funcion callback el primer parametro es el error y como segundo los adicionales que espera la funcion:
-    callback( null, usuario )
-  }
+//     // - Por convencion al llamar la funcion callback el primer parametro es el error y como segundo los adicionales que espera la funcion:
+//     callback( null, usuario )
+//   }
 
-}
+// }
 
 // - Aca pasamos la funcion "callbackExample" sin ejecutarla, esta se ejecutara desde "getUsuarioById", esto es un callback
-getUsuarioById( 5, callbackExample  )
+// getUsuarioById( 5, callbackExample  )
 
-function callbackExample( err, user ) {
+// function callbackExample( err, user ) {
 
-  if ( err ) {
-    return console.log( err )
+//   if ( err ) {
+//     return console.log( err )
+//   }
+
+//   console.log( 'Usuario de base de datos: ', user )
+// }
+
+/* -----------------------------------------------------------------
+            Problemas con los callbacks - Callback Hell
+----------------------------------------------------------------- */
+
+// - El mayor problema de usar callbacks radica en que podemos ir anidandolos de tal manera que se produce un "callback hell"
+
+const empleados = [{
+  id: 1,
+  nombre: 'Tulio'
+},{
+  id: 2,
+  nombre: 'Policarpio'
+},{
+  id: 3,
+  nombre: 'Bodoque'
+}]
+
+const salarios = [{
+  id: 1,
+  salario: 2000
+},{
+  id: 2,
+  salario: 1000
+}]
+
+const getEmpleado = ( id, callback ) => {
+
+  const empleadoDB = empleados.find( empleado => empleado.id === id )
+
+  if ( !empleadoDB ) {
+    callback( `No existe empleado con el id: ${ id }` )
+  } else {
+    callback( null, empleadoDB )
   }
 
-  console.log( 'Usuario de base de datos: ', user )
 }
 
+const getSalario = ( empleado, callback ) => {
 
+  const salariosDB = salarios.find( salario => salario.id === empleado.id )
 
+  if ( !salariosDB ) {
+    callback( `No existe un salario para el empleado: ${ empleado.nombre }` )
+  } else {
+    callback( null, {
+      nombre: empleado.nombre,
+      salario: salariosDB.salario,
+      id: empleado.id
+    })
+  }
 
+}
 
+// - Esto se conoce como "callback hell", basicamente es anidar de manera indeterminada callbacks generando un codigo muy dificil de mantener y engorroso de entender
+getEmpleado( 2, ( err, empleado ) => {
 
+  if ( err ) { return console.log( err ) }
 
+  getSalario( empleado, ( err, salario ) => {
 
+    if ( err ) { return console.log( err ) }
+
+    console.log(`El salario de ${ salario.nombre } es de ${ salario.salario }`)
+
+  } )
+
+} )
 
