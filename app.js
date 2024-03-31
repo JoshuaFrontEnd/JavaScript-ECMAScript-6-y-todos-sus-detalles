@@ -2477,60 +2477,60 @@
                  Promesas en lugar de callbacks
 ----------------------------------------------------------------- */
 
-const empleados = [{
-  id: 1,
-  nombre: 'Tulio'
-},{
-  id: 2,
-  nombre: 'Policarpio'
-},{
-  id: 3,
-  nombre: 'Bodoque'
-}]
+// const empleados = [{
+//   id: 1,
+//   nombre: 'Tulio'
+// },{
+//   id: 2,
+//   nombre: 'Policarpio'
+// },{
+//   id: 3,
+//   nombre: 'Bodoque'
+// }]
 
-const salarios = [{
-  id: 1,
-  salario: 2000
-},{
-  id: 2,
-  salario: 1000
-}]
+// const salarios = [{
+//   id: 1,
+//   salario: 2000
+// },{
+//   id: 2,
+//   salario: 1000
+// }]
 
-const getEmpleado = ( id ) => {
+// const getEmpleado = ( id ) => {
 
-  return new Promise( ( resolve, reject ) => {
+//   return new Promise( ( resolve, reject ) => {
 
-    const empleadoDB = empleados.find( empleado => empleado.id === id )
+//     const empleadoDB = empleados.find( empleado => empleado.id === id )
 
-    if ( !empleadoDB ) {
-      reject( `No existe empleado con el id: ${ id }` )
-    } else {
-      resolve( empleadoDB )
-    }
+//     if ( !empleadoDB ) {
+//       reject( `No existe empleado con el id: ${ id }` )
+//     } else {
+//       resolve( empleadoDB )
+//     }
 
-  })
+//   })
 
-}
+// }
 
-const getSalario = ( empleado ) => {
+// const getSalario = ( empleado ) => {
 
-  return new Promise( ( resolve, reject ) => {
+//   return new Promise( ( resolve, reject ) => {
 
-    const salariosDB = salarios.find( salario => salario.id === empleado.id )
+//     const salariosDB = salarios.find( salario => salario.id === empleado.id )
 
-    if ( !salariosDB ) {
-      reject( `No existe un salario para el empleado: ${ empleado.nombre }` )
-    } else {
-      resolve({
-        nombre: empleado.nombre,
-        salario: salariosDB.salario,
-        id: empleado.id
-      })
-    }
+//     if ( !salariosDB ) {
+//       reject( `No existe un salario para el empleado: ${ empleado.nombre }` )
+//     } else {
+//       resolve({
+//         nombre: empleado.nombre,
+//         salario: salariosDB.salario,
+//         id: empleado.id
+//       })
+//     }
 
-  })
+//   })
 
-}
+// }
 
 // getEmpleado( 1 )
 //   .then( empleado => {
@@ -2548,7 +2548,35 @@ const getSalario = ( empleado ) => {
 //   .catch( err =>  console.log( err ) )
 
 // - Refactorizando:
-getEmpleado( 1 )
-  .then( getSalario )
-  .then( console.log )
-  .catch( console.log )
+// getEmpleado( 1 )
+//   .then( getSalario )
+//   .then( console.log )
+//   .catch( console.log )
+
+/* -----------------------------------------------------------------
+                       Ecmascript 7: Async
+----------------------------------------------------------------- */
+
+const getNombre = async () => {
+
+  return new Promise((resolve, reject) => {
+
+    setTimeout(() => {
+      resolve('Tulio')
+    }, 3000 )
+
+  })
+
+}
+
+const saludo = async () => {
+
+  const nombre = await getNombre()
+
+  return `Hola ${nombre}`
+
+}
+
+saludo().then( console.log )
+
+// getNombre().then( console.log )
