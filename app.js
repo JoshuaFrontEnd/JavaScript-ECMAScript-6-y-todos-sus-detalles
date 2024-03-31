@@ -2411,6 +2411,72 @@
 
 // - El mayor problema de usar callbacks radica en que podemos ir anidandolos de tal manera que se produce un "callback hell"
 
+// const empleados = [{
+//   id: 1,
+//   nombre: 'Tulio'
+// },{
+//   id: 2,
+//   nombre: 'Policarpio'
+// },{
+//   id: 3,
+//   nombre: 'Bodoque'
+// }]
+
+// const salarios = [{
+//   id: 1,
+//   salario: 2000
+// },{
+//   id: 2,
+//   salario: 1000
+// }]
+
+// const getEmpleado = ( id, callback ) => {
+
+//   const empleadoDB = empleados.find( empleado => empleado.id === id )
+
+//   if ( !empleadoDB ) {
+//     callback( `No existe empleado con el id: ${ id }` )
+//   } else {
+//     callback( null, empleadoDB )
+//   }
+
+// }
+
+// const getSalario = ( empleado, callback ) => {
+
+//   const salariosDB = salarios.find( salario => salario.id === empleado.id )
+
+//   if ( !salariosDB ) {
+//     callback( `No existe un salario para el empleado: ${ empleado.nombre }` )
+//   } else {
+//     callback( null, {
+//       nombre: empleado.nombre,
+//       salario: salariosDB.salario,
+//       id: empleado.id
+//     })
+//   }
+
+// }
+
+// - Esto se conoce como "callback hell", basicamente es anidar de manera indeterminada callbacks generando un codigo muy dificil de mantener y engorroso de entender
+// getEmpleado( 2, ( err, empleado ) => {
+
+//   if ( err ) { return console.log( err ) }
+
+//   getSalario( empleado, ( err, salario ) => {
+
+//     if ( err ) { return console.log( err ) }
+
+//     console.log(`El salario de ${ salario.nombre } es de ${ salario.salario }`)
+
+//   } )
+
+// } )
+
+/* -----------------------------------------------------------------
+                 Promesas en lugar de callbacks
+----------------------------------------------------------------- */
+
 const empleados = [{
   id: 1,
   nombre: 'Tulio'
@@ -2430,46 +2496,59 @@ const salarios = [{
   salario: 1000
 }]
 
-const getEmpleado = ( id, callback ) => {
+const getEmpleado = ( id ) => {
 
-  const empleadoDB = empleados.find( empleado => empleado.id === id )
+  return new Promise( ( resolve, reject ) => {
 
-  if ( !empleadoDB ) {
-    callback( `No existe empleado con el id: ${ id }` )
-  } else {
-    callback( null, empleadoDB )
-  }
+    const empleadoDB = empleados.find( empleado => empleado.id === id )
 
-}
+    if ( !empleadoDB ) {
+      reject( `No existe empleado con el id: ${ id }` )
+    } else {
+      resolve( empleadoDB )
+    }
 
-const getSalario = ( empleado, callback ) => {
-
-  const salariosDB = salarios.find( salario => salario.id === empleado.id )
-
-  if ( !salariosDB ) {
-    callback( `No existe un salario para el empleado: ${ empleado.nombre }` )
-  } else {
-    callback( null, {
-      nombre: empleado.nombre,
-      salario: salariosDB.salario,
-      id: empleado.id
-    })
-  }
+  })
 
 }
 
-// - Esto se conoce como "callback hell", basicamente es anidar de manera indeterminada callbacks generando un codigo muy dificil de mantener y engorroso de entender
-getEmpleado( 2, ( err, empleado ) => {
+const getSalario = ( empleado ) => {
 
-  if ( err ) { return console.log( err ) }
+  return new Promise( ( resolve, reject ) => {
 
-  getSalario( empleado, ( err, salario ) => {
+    const salariosDB = salarios.find( salario => salario.id === empleado.id )
 
-    if ( err ) { return console.log( err ) }
+    if ( !salariosDB ) {
+      reject( `No existe un salario para el empleado: ${ empleado.nombre }` )
+    } else {
+      resolve({
+        nombre: empleado.nombre,
+        salario: salariosDB.salario,
+        id: empleado.id
+      })
+    }
 
-    console.log(`El salario de ${ salario.nombre } es de ${ salario.salario }`)
+  })
 
-  } )
+}
 
-} )
+// getEmpleado( 1 )
+//   .then( empleado => {
 
+//     // getSalario( empleado ).then( resp => {
+//     //   console.log( resp )
+//     // })
+
+//     return getSalario( empleado )
+
+//   })
+//   .then( resp => {
+//     console.log( resp )
+//   })
+//   .catch( err =>  console.log( err ) )
+
+// - Refactorizando:
+getEmpleado( 1 )
+  .then( getSalario )
+  .then( console.log )
+  .catch( console.log )
